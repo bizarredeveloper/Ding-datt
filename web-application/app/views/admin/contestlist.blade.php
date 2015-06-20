@@ -1,5 +1,5 @@
 @extends('header.header')
-<!-- All Cotest details view page --->
+<!-- All Cotest details view page -->
 <?php
 $assets_path = "assets/inner/";
 ?>
@@ -158,7 +158,7 @@ if (Session::has('searcheduser')) {
 
     <div class="tab-body-wrapper">
 
-        <!------ Cotest List---------------------->
+        <!-- Cotest List -->
         <div id="tab-body-1" class="tab-body">
             @if(isset($er_data['message']))
             <p class="alert" style="color:red; font-size:13px">{{ $er_data['message'] }}</p>

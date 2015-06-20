@@ -150,7 +150,7 @@ if (Session::has('searcheduser')) {
 
     <div class="tab-body-wrapper">
 
-        <!------ Contest participant List---------------------->
+        <!-- Contest participant List -->
         <div id="tab-body-1" class="tab-body">
             @if(isset($er_data['message']))
             <p class="alert" style="color:green; font-size:13px;">{{ $er_data['message'] }}</p>

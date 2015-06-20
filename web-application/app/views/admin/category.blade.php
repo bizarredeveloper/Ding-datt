@@ -1,5 +1,5 @@
 @extends('header.header')
-<!-- Category or interest page --->
+<!-- Category or interest page -->
 <?php
 $assets_path = "assets/inner/";
 ?>

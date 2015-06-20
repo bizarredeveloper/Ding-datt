@@ -127,7 +127,7 @@ if (Session::has('data')) {
 
     <div class="tab-body-wrapper">
 
-        <!------ Report List---------------------->
+        <!-- Report List -->
         <div id="tab-body-1" class="tab-body tab-body1" >
             @if(isset($data['message']))
             <p class="alert" style="color:red;">{{ $data['message'] }}</p>

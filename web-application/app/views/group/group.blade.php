@@ -1,5 +1,5 @@
 @extends('header.header')
-<!-- Create contest --->
+<!-- Create contest -->
 <?php
 $assets_path="assets/inner/";
 ?>

@@ -2640,12 +2640,12 @@ if ($contestdetails['contesttype'] == 'p') {
 
         <div class="ib-nav" style="display:none;">				
 
-        <!-- For Gallery ---------------->
+        <!-- For Gallery -->
 <?php if (Auth::user()->ID == 1) { ?>
             <span class="ib-nav-prev"  >Previous</span>
             <span class="ib-nav-next" >Next</span>
 <?php } else { ?>
-            <!-- It is for Voting Icon ------->					
+            <!-- It is for Voting Icon -->					
             <span class="ib-nav-prev" onclick="voting('dislike','p')" >Previous</span>
             <span class="ib-nav-next" onclick="voting('like','p')">Next</span>
             <span class="ib-nav-pass" onclick="voting('pass','p')">Pass</span>
@@ -2673,7 +2673,7 @@ if ($contestdetails['contesttype'] == 'p') {
         <div class="participant_id" style="display:none;">${contestid}</div>
 
         <div class="ib-nav" style="display:none;">				
-        <!-- It is for Voting Icon ------->	
+        <!-- It is for Voting Icon -->	
 <?php if (Auth::user()->ID == 1) { ?>
 
             <span class="ib-nav-prev"  >Previous</span>
@@ -2691,7 +2691,7 @@ if ($contestdetails['contesttype'] == 'p') {
 
         </div>
     </script>
-    <!--- For Video Preview ---->
+    <!-- For Video Preview -->
 
     <script id="previewTmplvideo" type="text/x-jquery-tmpl">
         <div id="ib-video-preview" class="ib-preview">
@@ -2702,7 +2702,7 @@ if ($contestdetails['contesttype'] == 'p') {
         <video alt="" class="ib-preview-video" controls><source src="${src}" type="video/mp4"></video>
         <div class="participant_id" style="display:none;">${contestid}</div>
         <div class="ib-nav" style="display:none;">				
-        <!-- It is for Voting Icon ------->	
+        <!-- It is for Voting Icon -->	
 <?php if (Auth::user()->ID == 1) { ?>
 
             <span class="ib-nav-prev"  >Previous</span>
