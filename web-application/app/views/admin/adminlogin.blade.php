@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Login Page for admin --->
+<!-- Login Page for admin -->
 <html lang="en-US">
     <head>
         <meta charset="utf-8">
