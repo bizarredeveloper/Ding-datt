@@ -1,0 +1,126 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+   	android:layout_width="260dp"
+    android:layout_height="240dp"
+    android:layout_gravity="center"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="@string/upload_topic_contest"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/topic"
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:layout_below="@+id/title"
+                android:layout_margin="10dp"
+                android:background="#ffffff"
+                android:gravity="top|left"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp" />
+
+            <!-- <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="225dp" >
+                
+                <LinearLayout 
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1">
+                    <ImageView 
+                        android:id="@+id/photo"
+                        android:layout_height="100dp"
+                        android:src="@drawable/topic_imageicon"
+                        android:layout_width="100dp"/>
+                    
+                    <Button 
+                        android:id="@+id/photocamera"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_margin="5dp"
+                        android:textColor="#000000"
+                        android:background="@drawable/button_select"
+                        android:layout_width="100dp"
+                        android:text="@string/take_a_picture"/>
+                    
+                    <Button 
+                        android:id="@+id/photogallery"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:textColor="#000000"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/gallery_button_select"
+                        android:layout_width="100dp"
+                        android:text="@string/select_from_gallery"/>
+                </LinearLayout>
+                
+                <LinearLayout 
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1">
+                    <ImageView 
+                        android:id="@+id/video"
+                        android:layout_height="100dp"
+                        android:src="@drawable/topic_videoicon"
+                        android:layout_width="100dp"/>
+                    
+                    <Button 
+                        android:id="@+id/videocamera"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:textColor="#000000"
+                        android:layout_margin="5dp"
+                        android:textSize="14dp"
+                        android:background="@drawable/button_select"
+                        android:text="@string/take_a_video"/>
+                    
+                    <Button 
+                        android:id="@+id/videogallery"
+                        android:layout_height="wrap_content"
+                        android:layout_width="100dp"
+                        android:textColor="#000000"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/gallery_button_select"
+                        android:textSize="14dp"
+                        android:text="@string/select_from_gallery"/>
+                </LinearLayout>
+            </LinearLayout> -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/topic"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_select"
+                    android:text="@string/submit"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

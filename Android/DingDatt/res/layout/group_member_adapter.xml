@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="#66000000"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <com.bizarre.dingdatt.adapter.RoundedImageView
+            android:id="@+id/picture"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:orientation="vertical" >
+        </com.bizarre.dingdatt.adapter.RoundedImageView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:paddingLeft="10dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/owner_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/owner_colon"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:id="@+id/owner"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:paddingLeft="10dp"
+                    android:textColor="#0a95d6"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="fill_parent"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/event"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:textColor="#ff0000"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/menu_left_arrow" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

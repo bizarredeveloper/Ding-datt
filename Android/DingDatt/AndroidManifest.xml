@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bizarre.dingdatt"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- Required to show current location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.NETWORK" />
+
+    <uses-feature android:name="android.hardware.camera" >
+    </uses-feature>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" >
+    </uses-feature>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <provider
+            android:name="com.facebook.NativeAppCallContentProvider"
+            android:authorities="com.facebook.app.NativeAppCallContentProvider1397814467205564"
+            android:exported="true" />
+
+        <activity
+            android:name="com.facebook.LoginActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name" >
+                <action android:name="android.intent.action.VIEW" />
+                <!-- Accepts URIs that begin with "http://example.com/gizmos" -->
+                <data
+                    android:host="projects.bizarresoftware.in"
+                    android:pathPrefix="/dingdatt/webpage/contest_info"
+                    android:scheme="http" />
+                <data
+                    android:host="projects.bizarresoftware.in"
+                    android:pathPrefix="/dingdatt/webpage/viewgroupmember"
+                    android:scheme="http" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".AContestListActivity"
+            android:label="@string/title_activity_contest"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ContestInfoActivity"
+            android:label="@string/title_activity_contest"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ContestListSampleActivity"
+            android:label="@string/title_activity_contest_list_sample"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/list" />
+        </activity>
+        <activity
+            android:name=".ContestInfoSampleActivity"
+            android:label="@string/title_activity_contest_info_sample"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ContestGalleryActivity"
+            android:label="@string/title_activity_contest_gallery"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ContestVotingActivity"
+            android:label="@string/title_activity_contest_voting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".CommentActivity"
+            android:label="@string/title_activity_comment"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MyProfileActivity"
+            android:label="@string/title_activity_my_profile"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".CreateEditContestActivity"
+            android:label="@string/title_activity_create_edit_contest"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".DateTimePickerDialog"
+            android:label="@string/title_activity_create_edit_contest"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".MyContestActivity"
+            android:label="@string/title_activity_my_contest"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".Dummy"
+            android:label="@string/title_activity_dummy"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".twitter.WebviewActivity"
+            android:label="Twitter"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <receiver
+            android:name=".gcmservice.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.bizarre.dingdatt" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".gcmservice.GcmIntentService" />
+
+        <activity
+            android:name=".ForgotPassword"
+            android:label="@string/title_activity_forgot_password"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bizarre.dingdatt.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".ViewGalleryActivity"
+            android:label="@string/title_activity_view_gallery"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".TopicDialogActivity"
+            android:label="@string/title_activity_topic_dialog"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.houcine.tumblr.library.TumblrLoginActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="tumblrlogin"
+                    android:scheme="x-oauthflow-tumblr" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".service.BackSyncService" >
+        </service>
+        <service android:name=".service.NotificationService" >
+        </service>
+
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="@string/title_activity_edit_profile"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".CreateEditGroupActivity"
+            android:label="@string/title_activity_create_edit_group"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".GroupListActivity"
+            android:label="@string/title_activity_group_list"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/group" />
+        </activity>
+        <activity
+            android:name=".MemberListActivity"
+            android:label="@string/title_activity_member_list"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/member" />
+        </activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:label="@string/title_activity_notification"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MemberInviteActivity"
+            android:theme="@android:style/Theme.Holo"
+            android:label="@string/title_activity_member_invite">
+        </activity>
+        
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+    </application>
+
+</manifest>

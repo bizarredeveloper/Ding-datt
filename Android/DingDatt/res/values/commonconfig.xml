@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id">1397814467205564</string>
+     <!-- Twitter Configurations -->
+    <string name="twitter_callback"> http://www.bizarresoftware.in</string>
+    <string name="twitter_consumer_key">F44TE4xlZZEXLR0kB9uGgLRPB</string>
+    <string name="twitter_consumer_secret">EN5WwDsmcd33kX8SyWHo9582Uh8K04sFE5WsglN3Nk0sChGDM6</string>
+    <string name="twitter_oauth_verifier">oauth_verifier</string>
+</resources>

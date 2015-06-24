@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <com.google.android.gms.ads.AdView
+     android:id="@+id/adView"
+     android:layout_height="wrap_content"
+     android:layout_width="match_parent"
+     ads:adSize="BANNER"
+     ads:adUnitId="@string/ad_unit_id"/>
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="fill_parent" >
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_blue_left"
+                        android:scaleType="center"
+                        android:src="@drawable/user_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <EditText
+                        android:id="@+id/contest_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_white_right"
+                        android:hint="@string/contest_name"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:paddingLeft="5dp"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <com.bizarre.dingdatt.adapter.RoundedImageView
+                        android:id="@+id/contest_image2"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:scaleType="center"
+                        android:src="@drawable/girl"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/contest_image"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_white_left"
+                        android:gravity="center|left"
+                        android:hint="@string/upload_contest_image"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:paddingLeft="5dp"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="fill_parent" >
+
+                    <ImageView
+                        android:id="@+id/contest_image1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_blue_right"
+                        android:scaleType="center"
+                        android:src="@drawable/upload_photo_icon" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <Spinner
+                        android:id="@+id/contest_type"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_white_left"
+                        android:hint="@string/contest_type"
+                        android:paddingLeft="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="fill_parent" >
+
+                    <ImageView
+                        android:id="@+id/contest_type1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_blue_right"
+                        android:scaleType="center"
+                        android:src="@drawable/selectbox_down_icon" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="25dp"
+                android:layout_margin="5dp" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/contest_period"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/contest_start_date1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/border_white_left"
+                            android:hint="@string/start_date"
+                            android:gravity="center|left"
+                            android:paddingLeft="5dp"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="fill_parent" >
+
+                        <ImageView
+                            android:id="@+id/contest_start_date2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/border_blue_right"
+                            android:scaleType="center"
+                            android:src="@drawable/date_icon" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/contest_end_date1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/border_white_left"
+                            android:hint="@string/end_date"
+                            android:gravity="center|left"
+                            android:paddingLeft="5dp"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="fill_parent" >
+
+                        <ImageView
+                            android:id="@+id/contest_end_date2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/border_blue_right"
+                            android:scaleType="center"
+                            android:src="@drawable/date_icon" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="25dp"
+                android:layout_margin="5dp" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/voting_period"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/voting_start_date1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/border_white_left"
+                            android:hint="@string/start_date"
+                            android:paddingLeft="5dp"
+                            android:gravity="center|left"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="fill_parent" >
+
+                        <ImageView
+                            android:id="@+id/voting_start_date2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/border_blue_right"
+                            android:scaleType="center"
+                            android:src="@drawable/date_icon" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1" >
+
+                        <TextView
+                            android:id="@+id/voting_end_date1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/border_white_left"
+                            android:hint="@string/end_date"
+                            android:gravity="center|left"
+                            android:paddingLeft="5dp"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="fill_parent" >
+
+                        <ImageView
+                            android:id="@+id/voting_end_date2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/border_blue_right"
+                            android:scaleType="center"
+                            android:src="@drawable/date_icon" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="fill_parent" >
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_blue_left"
+                        android:scaleType="center"
+                        android:src="@drawable/user_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <EditText
+                        android:id="@+id/noofparticipant"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_white_right"
+                        android:hint="@string/no_of_participant"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:paddingLeft="5dp"
+                        android:textColor="#000000"
+                        android:textSize="13dp" />
+                    
+                    <TextView
+                        android:id="@+id/noofparticipant1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:hint="@string/un_limited"
+                        android:maxLength="30"
+                        android:paddingLeft="5dp"
+                        android:gravity="center|left"
+                        android:textColor="#ffffff"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:visibility="gone"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="fill_parent" >
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_blue_left"
+                        android:scaleType="center"
+                        android:src="@drawable/prize_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <EditText
+                        android:id="@+id/contest_prize"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_white_right"
+                        android:hint="@string/contest_prize"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:paddingLeft="5dp"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="25dp"
+                android:layout_margin="5dp" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/contest_information"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="120dp"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <EditText
+                        android:id="@+id/contest_info"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/border_white_right"
+                        android:singleLine="false"
+                        android:gravity="left|top"
+                        android:paddingLeft="5dp"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="25dp"
+                android:layout_margin="5dp" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/interest"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:id="@+id/interrest"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="45dp"
+                android:layout_margin="5dp" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <Button
+                        android:id="@+id/create_contest"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/signin_button_select"
+                        android:gravity="center"
+                        android:hint="@string/create_contest"
+                        android:paddingLeft="20dp"
+                        android:textColor="#ffffff"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

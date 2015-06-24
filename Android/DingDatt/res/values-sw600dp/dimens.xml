@@ -1,0 +1,11 @@
+<resources>
+
+    <!--
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw600dp devices (e.g. 7" tablets) here.
+    -->
+
+<dimen name="regis_margin_leftright">50dp</dimen>
+<dimen name="username_width">340dp</dimen>
+<dimen name="actionbar_height">60dp</dimen>
+</resources>

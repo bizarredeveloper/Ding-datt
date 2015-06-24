@@ -1,0 +1,124 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".MainActivity" >
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/ad_unit_id" />
+
+    <LinearLayout
+        android:id="@+id/tab1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/adView"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/current"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#B5FF94"
+            android:gravity="center"
+            android:text="@string/current"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/upcoming"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#B5FF94"
+            android:gravity="center"
+            android:text="@string/upcoming"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/archive"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#B5FF94"
+            android:gravity="center"
+            android:text="@string/archive"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/private1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/tab_border"
+            android:gravity="center"
+            android:text="@string/private_text"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tab2"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tab1"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/photo"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/tab_border1"
+            android:gravity="center"
+            android:text="@string/photo"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/video"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#73DBFF"
+            android:gravity="center"
+            android:text="@string/video"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/topic"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#73DBFF"
+            android:gravity="center"
+            android:text="@string/topic"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tab3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/tab2"
+        android:orientation="horizontal" >
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>
