@@ -278,22 +278,14 @@ if (isset($inputs['subtab'])) {
                                 <input type="hidden" id="subtab" name="subtab" value="private">
                 <?php $interestDetails = InterestCategoryModel::where('status', 1)->lists('Interest_name', 'Interest_id');
                 ?>									
-                                {{ Form::select('interest', array('Select category')+$interestDetails,isset($inputs['interest'])?$inputs['interest']:'',array('id'=> 'interestid_1','class'=>'radius sel_lang selectinterstphoto','style'=>'background:#ffffff'))}} 
+                                {{ Form::select('interest', array('Select category')+$interestDetails,isset($inputs['interest'])?$inputs['interest']:'',array('id'=> 'interestid_1','class'=>'radius sel_lang'))}} 
 
                                 <input type="text" name="tsearch1" id="tsearch" value="{{ isset($inputs['tsearch1'])?$inputs['tsearch1']:'' }}" class="pch_searchcontest" placeholder="Search Contest" />
-                                <input class="search_btn photo" type="submit" value="" />
+                                <input class="search_btn" type="submit" value="" />
                             </div>
                         </form>
                     </div>
                 </div>
-				
-				<script>
-				$(document).ready(function(){ 
-				$(".selectinterstphoto").change(function(){
-				$(".photo").trigger("click");
-				});
-				});				
-				</script>
                         <?php
                         $currentdate = date('Y-m-d H:i:s');
                         $photocontest = contestModel::where(function($query) {
@@ -347,22 +339,14 @@ if ($contestcount > 10) {
 
                 <?php $interestDetails = InterestCategoryModel::where('status', 1)->lists('Interest_name', 'Interest_id');
                 ?>									
-                                {{ Form::select('interest', array('Select category')+$interestDetails,isset($inputs['interest'])?$inputs['interest']:'',array('id'=> 'interestid_2','class'=>'radius sel_lang selectinterstvideo','style'=>'background:#ffffff'))}} 
+                                {{ Form::select('interest', array('Select category')+$interestDetails,isset($inputs['interest'])?$inputs['interest']:'',array('id'=> 'interestid_2','class'=>'radius sel_lang'))}} 
 
                                 <input type="text" name="tsearch2" id="tsearch" value="{{ isset($inputs['tsearch2'])?$inputs['tsearch2']:'' }}" class="pch_searchcontest" placeholder="Search Contest" />
-                                <input class="search_btn video" type="submit" value="" />
+                                <input class="search_btn" type="submit" value="" />
                             </div>
                         </form>
                     </div>
                 </div>
-				
-				<script>
-				$(document).ready(function(){ 
-				$(".selectinterstvideo").change(function(){
-				$(".video").trigger("click");
-				});
-				});				
-				</script>
 <?php
 $videocontest = contestModel::where(function($query) {
                     $query->where(function($query) {
@@ -421,22 +405,14 @@ if ($videocontestcount > 10) {
 
                 <?php $interestDetails = InterestCategoryModel::where('status', 1)->lists('Interest_name', 'Interest_id');
                 ?>									
-                                {{ Form::select('interest', array('Select category')+$interestDetails,isset($inputs['interest'])?$inputs['interest']:'',array('id'=> 'interestid_3','class'=>'radius sel_lang selectintersttopic','style'=>'background:#ffffff'))}} 
+                                {{ Form::select('interest', array('Select category')+$interestDetails,isset($inputs['interest'])?$inputs['interest']:'',array('id'=> 'interestid_3','class'=>'radius sel_lang'))}} 
 
                                 <input type="text" name="tsearch3" id="tsearch" value="{{ isset($inputs['tsearch3'])?$inputs['tsearch3']:'' }}" class="pch_searchcontest" placeholder="Search Contest" />
-                                <input class="search_btn topic" type="submit" value="" />
+                                <input class="search_btn" type="submit" value="" />
                             </div>
                         </form>
                     </div>
                 </div>
-				
-				<script>
-				$(document).ready(function(){ 
-				$(".selectintersttopic").change(function(){
-				$(".topic").trigger("click");
-				});
-				});				
-				</script>
 <?php
 $topiccontest = contestModel::where(function($query) {
                     $query->where(function($query) {

@@ -230,18 +230,16 @@ if (Session::has('searcheduser')) {
 
                                         if ($searcheduser != '') {
 
-                                            $userlist = ProfileModel::select('profilepicture', 'firstname', 'lastname', 'username', 'ID', 'email', 'mobile', 'status')->where('username', 'like', '%' . $searcheduser . '%')->Orwhere('firstname', 'like', '%' . $searcheduser . '%')->whereNotIn('ID', array(1))->get();
+                                            $userlist = ProfileModel::select('profilepicture', 'firstname', 'lastname', 'username', 'ID', 'email', 'mobile', 'status')->where('username', 'like', '%' . $searcheduser . '%')->Orwhere('firstname', 'like', '%' . $searcheduser . '%')->get();
                                         } else {
-                                            $userlist = ProfileModel::select('profilepicture', 'firstname', 'lastname', 'username', 'ID', 'email', 'mobile', 'status')->whereNotIn('ID', array(1))->get();
+                                            $userlist = ProfileModel::select('profilepicture', 'firstname', 'lastname', 'username', 'ID', 'email', 'mobile', 'status')->get();
                                         }
 
-										//echo count($userlist);
-										
                                         for ($i = 0; $i < count($userlist); $i++) {
                                             if ($userlist[$i]['ID'] != 1) {
                                                 ?>
                                                 <tr>
-                                                    <td>{{ $i+1; }} </td>
+                                                    <td>{{ $i; }} </td>
                                                     <td class="tr_wid_id">{{ $userlist[$i]['firstname'].' '.$userlist[$i]['lastname'] }}</td>
                                                     <td >{{ $userlist[$i]['username'] }}</td>
                                                     <td align="center"><img src="{{ ($userlist[$i]['profilepicture']!='')?(URL::to('public/assets/upload/profile/'.$userlist[$i]['profilepicture'])):(URL::to('assets/inner/images/avator.png')) }}" width="50" height="50"></td>

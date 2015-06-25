@@ -420,8 +420,6 @@ public function getcontestmobile()
 		$contest['conteststartdate'];
 		
 		$interestdetails = contestinterestModel::select('interest_category.interest_id','interest_category.Interest_name')->where('contest_id',$contestid)->LeftJoin('interest_category','interest_category.interest_id','=','contest_interest_categories.category_id')->where('interest_category.status',1)->get();
-
-		
 		$contest->themephoto = url().'/public/assets/upload/contest_theme_photo/'.$contest->themephoto;
 		
 		$contest->sponsorphoto = url().'/public/assets/upload/sponsor_photo/'.$contest->sponsorphoto;
@@ -752,9 +750,8 @@ public function getcontestinfo()
 	$contestDetails[$i]->votingenddate = timezoneModel::convert($contestDetails[$i]->votingenddate, 'UTC',$timezone, 'd-m-Y h:i a');
 	
 	$contestDetails[$i]->createddate = timezoneModel::convert($contestDetails[$i]->createddate, 'UTC', $timezone,'d-m-Y h:i a');
-	}
-$contestparticipantcount = contestparticipantModel::where('contest_id',$contestid)->get();	
-	$contestparticipantcount = count($contestparticipantcount);
+	}	
+	$contestparticipantcount=contestparticipantModel::where('contest_id',$contestid)->get()->count();
 	} 
 	  
       $Response = array(
@@ -783,8 +780,25 @@ public function joincontest()
 		}
 		if(Input::get('uploadtopic')!='')
 		{
+		////////New requirements/////////////////				
+			if(Input::file('topicphoto')!=''){
+				$destinationtopicphoto='public/assets/upload/topicphotovideo';
+				$topicphoto = Input::file('topicphoto')->getClientOriginalName();
+				$topicImage = str_random(8).'_'.$topicphoto;
+				$inputdetails['topicphoto']= $topicImage;			
+			}
+			if(Input::file('topicvideo')!=''){
+				$destinationtopicvideo='public/assets/upload/topicphotovideo';
+				$topicvideo = Input::file('topicvideo')->getClientOriginalName();
+				$topicvideoname = str_random(8).'_'.$topicvideo;
+				$inputdetails['topicvideo']= $topicvideoname;		
+			
+			}		
+			
 			$inputdetails['uploadtopic']=Input::get('uploadtopic'); //return $inputdetails;
 			$validation  = Validator::make($inputdetails, contestparticipantModel::$topicrules);
+			
+			
 		}
 	  ///// Check Already Participated user in this Contest or not
 		$user_id = Input::get('user_id');
@@ -826,6 +840,17 @@ public function joincontest()
 						
 						/// Dropbox end ////////
 		    }
+			if(Input::get('uploadtopic')!='')
+		    {				
+				if(Input::file('topicphoto')!=''){ 
+					$topicphotofile = Input::file('topicphoto');
+					$uploadSuccess = $topicphotofile->move($destinationtopicphoto,$topicImage);				
+				}
+				if(Input::file('topicvideo')!=''){ 
+					$topicphotofile = Input::file('topicvideo');
+					$uploadSuccess = $topicphotofile->move($destinationtopicvideo,$topicvideoname);				
+				}
+			}
 			
 			$participant = contestparticipantModel::where('contest_id',$contest_id)
 				->where('user_id',$user_id)
@@ -891,7 +916,19 @@ public function joincontest()
 						
 						/// Dropbox end ////////
 					}
-					$participant = contestparticipantModel::create($inputdetails);
+					
+					if(Input::get('uploadtopic')!='')
+					{				
+						if(Input::file('topicphoto')!=''){ 
+							$topicphotofile = Input::file('topicphoto');
+							$uploadSuccess = $topicphotofile->move($destinationtopicphoto,$topicImage);				
+						}
+						if(Input::file('topicvideo')!=''){ 
+							$topicphotofile = Input::file('topicvideo');
+							$uploadSuccess = $topicphotofile->move($destinationtopicvideo,$topicvideoname);				
+						}
+					}
+							$participant = contestparticipantModel::create($inputdetails);
 					$Response = array(
 							'success' => '1',
 							'message' => 'Record Added Successfully',
@@ -920,7 +957,7 @@ public function contestgallery()
 	$timezone = Input::get('timezone');
 	$votinguser = Input::get('user_id');
 	
-	$participantlist = contestparticipantModel::select('user.username','user.firstname','user.lastname','user.ID as user_id','user.profilepicture','contestparticipant.ID as contestparticipantid','contestparticipant.contest_id','contestparticipant.uploadfile','contestparticipant.uploaddate','contestparticipant.uploadtopic','contestparticipant.dropbox_path')->where('contest_id',$contest_id)->LeftJoin('user','user.ID','=','contestparticipant.user_id')->get();
+	$participantlist = contestparticipantModel::select('user.username','user.firstname','user.lastname','user.ID as user_id','user.profilepicture','contestparticipant.ID as contestparticipantid','contestparticipant.contest_id','contestparticipant.uploadfile','contestparticipant.uploaddate','contestparticipant.uploadtopic','contestparticipant.dropbox_path','contestparticipant.topicphoto','contestparticipant.topicvideo')->where('contest_id',$contest_id)->LeftJoin('user','user.ID','=','contestparticipant.user_id')->get();
 	
 		
 	for($i=0;$i<count($participantlist);$i++)
@@ -933,6 +970,10 @@ public function contestgallery()
 	
 	$participantlist[$i]->uploaddate = timezoneModel::convert($participantlist[$i]->uploaddate, 'UTC',$timezone, 'd-m-Y h:i a');
 	$participantlist[$i]->uploadfile  = url().'/public/assets/upload/contest_participant_photo/'.$participantlist[$i]->uploadfile;
+	
+	if($participantlist[$i]->topicvideo!='') $participantlist[$i]->topicvideo = url().'/public/assets/upload/topicphotovideo/'.$participantlist[$i]->topicvideo;
+	
+	if($participantlist[$i]->topicphoto!='') $participantlist[$i]->topicphoto = url().'/public/assets/upload/topicphotovideo/'.$participantlist[$i]->topicphoto; 
 
   //$participantlist[$i]->uploadfile  = $participantlist[$i]->dropbox_path;
 	
@@ -1048,7 +1089,7 @@ public function leaderboard()
 	for($i=0; $i<count($leaderboardresult);$i++)
   {
   
-  $contestdetails = contestparticipantModel::select('contestparticipant.uploadfile','contestparticipant.uploadtopic','user.firstname','user.lastname','user.username','contestparticipant.dropbox_path')->LeftJoin('user','user.ID','=','contestparticipant.user_id')->where('contest_id', $leaderboardresult[$i]['contest_id'])->where('user_id',$leaderboardresult[$i]['user_id'])->get()->first();
+  $contestdetails = contestparticipantModel::select('contestparticipant.uploadfile','contestparticipant.uploadtopic','user.firstname','user.lastname','user.username','contestparticipant.dropbox_path','contestparticipant.topicphoto','contestparticipant.topicvideo')->LeftJoin('user','user.ID','=','contestparticipant.user_id')->where('contest_id', $leaderboardresult[$i]['contest_id'])->where('user_id',$leaderboardresult[$i]['user_id'])->get()->first();
   
   
   
@@ -1059,6 +1100,10 @@ public function leaderboard()
  // $leaderboardresult[$i]->uploadfile  = $leaderboardresult[$i]->dropbox_path;
   
   $leaderboardresult[$i]['uploadtopic'] = $contestdetails->uploadtopic;
+  
+  	if($leaderboardresult[$i]->topicvideo!='') $leaderboardresult[$i]->topicvideo = url().'/public/assets/upload/topicphotovideo/'.$leaderboardresult[$i]->topicvideo;
+	
+	if($leaderboardresult[$i]->topicphoto!='') $leaderboardresult[$i]->topicphoto = url().'/public/assets/upload/topicphotovideo/'.$leaderboardresult[$i]->topicphoto;
   
  // if($getcomments[$i]['firstname']!=''){  $getcomments[$i]['name']=$getcomments[$i]['firstname'].' '.$getcomments[$i]['lastname']; } else { $getcomments[$i]['name']=$getcomments[$i]['username'];} 
   }
@@ -1265,13 +1310,17 @@ public function myhistory()
  // $myhistory = contestparticipantModel::where('user_id',$userid)->get();
  
  	$curdate=date('Y-m-d H:i:s');
-		$myhistory = contestparticipantModel::select('contest.contest_name','contestparticipant.contest_id','contestparticipant.uploadfile','contestparticipant.uploadtopic','contest.contesttype','contestparticipant.dropbox_path')->where('contestparticipant.user_id',$userid)->LeftJoin('contest','contest.ID','=','contestparticipant.contest_id')->where('contest.votingenddate','<',$curdate)->LeftJoin('user','user.ID','=','contest.createdby')->get();
+		$myhistory = contestparticipantModel::select('contest.contest_name','contestparticipant.contest_id','contestparticipant.uploadfile','contestparticipant.uploadtopic','contest.contesttype','contestparticipant.dropbox_path','contestparticipant.topicvideo','contestparticipant.topicphoto')->where('contestparticipant.user_id',$userid)->LeftJoin('contest','contest.ID','=','contestparticipant.contest_id')->where('contest.votingenddate','<',$curdate)->LeftJoin('user','user.ID','=','contest.createdby')->get();
 
 
  for($i=0; $i<count($myhistory);$i++)
   {
   $myhistory[$i]->uploaddate = timezoneModel::convert($myhistory[$i]->uploaddate, 'UTC',$timezone, 'd-m-Y h:i a');
   $myhistory[$i]->uploadfile  = url().'/public/assets/upload/contest_participant_photo/'.$myhistory[$i]->uploadfile;
+  
+    	if($myhistory[$i]->topicvideo!='') $myhistory[$i]->topicvideo = url().'/public/assets/upload/topicphotovideo/'.$myhistory[$i]->topicvideo;
+	
+	if($myhistory[$i]->topicphoto!='') $myhistory[$i]->topicphoto = url().'/public/assets/upload/topicphotovideo/'.$myhistory[$i]->topicphoto;
  
  //$myhistory[$i]->uploadfile  = $myhistory[$i]->dropbox_path;
   
@@ -2018,7 +2067,7 @@ public function participantdetails()
 	$contest_id = Input::get('contest_id');
 	$timezone = Input::get('timezone');
 	 $particiapnt_user_id = Input::get('participantuserid');
-	$participantlist = contestparticipantModel::select('user.username','user.firstname','user.lastname','user.ID as user_id','user.profilepicture','contestparticipant.ID as contestparticipantid','contestparticipant.contest_id','contestparticipant.uploadfile','contestparticipant.uploaddate','contestparticipant.uploadtopic','contestparticipant.dropbox_path')->where('contest_id',$contest_id)->where('user_id',$particiapnt_user_id)->LeftJoin('user','user.ID','=','contestparticipant.user_id')->get();
+	$participantlist = contestparticipantModel::select('user.username','user.firstname','user.lastname','user.ID as user_id','user.profilepicture','contestparticipant.ID as contestparticipantid','contestparticipant.contest_id','contestparticipant.uploadfile','contestparticipant.uploaddate','contestparticipant.uploadtopic','contestparticipant.dropbox_path','contestparticipant.topicphoto','contestparticipant.topicvideo')->where('contest_id',$contest_id)->where('user_id',$particiapnt_user_id)->LeftJoin('user','user.ID','=','contestparticipant.user_id')->get();
 	
 	for($i=0;$i<count($participantlist);$i++)
 	{
@@ -2031,6 +2080,10 @@ if($participantlist[$i]->profilepicture!=''){ $participantlist[$i]->profilepictu
 
 	//$participantlist[$i]->uploadfile = $participantlist[$i]->dropbox_path;
 	$participantlist[$i]->uploadfile = url().'/public/assets/upload/contest_participant_photo/'.$participantlist[$i]->uploadfile;
+	
+	if($participantlist[$i]->topicphoto!='') $participantlist[$i]->topicphoto = url().'/public/assets/upload/topicphotovideo/'.$participantlist[$i]->topicphoto;
+	
+	if($participantlist[$i]->topicvideo!='') $participantlist[$i]->topicvideo = url().'/public/assets/upload/topicphotovideo/'.$participantlist[$i]->topicvideo;
 	
 	}
 	
@@ -2121,10 +2174,9 @@ public function invitegroupsforcontest()
 						$user_id = User::find($group_members[$i]['user_id']);
 						$gcmid = $user_id['gcm_id'];
 						$email = $user_id['email'];
-						$device_type = $user_id['device_type'];
 						
 						///////
-							if($gcmid!='' && $device_type=='A'){
+							if($gcmid!=''){
 							$Message['user_id']=$group_members[$i]['user_id'];
 							$Message['title']='Ding Datt';
 							$Message['message']='You are invited for the Contest :'.$contestname;
@@ -2134,13 +2186,7 @@ public function invitegroupsforcontest()
 							$Message = array("notification"=>$Message);
 							$this->PushNotification($DeviceId, $Message);
 							
-							}else if($gcmid!='' && $device_type=='I'){
-						$DeviceId = $gcmid;
-						$Message = $group_members[$i]['user_id'].'*You are invited for the Contest :'.$contestname;
-						$Message = str_replace(" ", "_", $Message);
-						$this->PushNotificationIos($DeviceId,$Message);
-					
-					}else{
+							}else{
 						
 					
 								$user=ProfileModel::where('ID',$group_members[$i]['user_id'])->first();
@@ -2157,7 +2203,7 @@ public function invitegroupsforcontest()
 					if($invvitedsata) $inv_suc_message=1;
 					}
 			}
-		}else{  $inv_suc_message=2; }
+		}
 		}
 		if($inv_suc_message==1)
 		{	
@@ -2168,16 +2214,6 @@ public function invitegroupsforcontest()
 				);
 			$final=array("response"=>$Response);
 			return json_encode($final);	
-		}else if($inv_suc_message==2){
-		
-			$Response = array(
-					'success' => '1',
-					'message' => 'Invited Successfully',
-					'msgcode' =>"c166",
-				);
-			$final=array("response"=>$Response);
-			return json_encode($final);	
-		
 		}else{ 		
 			$Response = array(
 					'success' => '0',
@@ -2258,9 +2294,8 @@ public function invitegroupmemberforcontest(){
 						$name=$user['username'];
 						$email=$user['email'];
 						$gcmid = $user['gcm_id'];
-						$device_type = $user['device_type'];
 						///
-						if($gcmid!='' && $device_type=='A'){
+						if($gcmid!=''){
 					$Message['user_id']=$groupmemberid['user_id'];
 					$Message['title']='Ding Datt';
 					$Message['message']='You are invited for the Contest :'.$contestname;
@@ -2269,12 +2304,6 @@ public function invitegroupmemberforcontest(){
 					$DeviceId = array($gcmid);
 					$Message = array("notification"=>$Message);
 					$this->PushNotification($DeviceId, $Message);
-					
-					}else if($gcmid!='' && $device_type=='I'){
-						$DeviceId = $gcmid;
-						$Message = $groupmemberid['user_id'].'*You are invited for the Contest :'.$contestname;
-						$Message = str_replace(" ", "_", $Message);
-						$this->PushNotificationIos($DeviceId,$Message);
 					
 					} else { 
 					$this->invitegroupmemberforcontestmail($email,$contestcreatedby,$contesttype,$contestname,$contest_id,$groupname,$contestimage,$conteststartdate,$contestenddate);
@@ -2350,12 +2379,9 @@ if($invite_type=='All')
 			
 			//return $uninvitedfollower[$i];
 			
-		 //$folloerdetails = followModel::select('user.firstname','user.lastname','user.username','user.ID as follower_user_id','user.gcm_id','user.email','user.device_type')->LeftJoin('user','user.ID','=','followers.followerid')->where('followers.id',$uninvitedfollower[$i])->get();
-		 
-		 $folloerdetails = ProfileModel::where('ID',$followerid)->get();
+		 $folloerdetails = followModel::select('user.firstname','user.lastname','user.username','user.ID as follower_user_id','user.gcm_id','user.email')->LeftJoin('user','user.ID','=','followers.followerid')->where('followers.id',$uninvitedfollower[$i])->get();
 		
 		 $gcmid = $folloerdetails[0]['gcm_id'];
-		 $device_type = $folloerdetails[0]['device_type'];
 		 $email = $folloerdetails[0]['email'];
 		 if($folloerdetails[0]['firstname']!=''){ $name =$folloerdetails[0]['firstname'].' '.$folloerdetails[0]['lastname']; }else{ $name =$folloerdetails[0]['username'];} 
 		
@@ -2372,7 +2398,7 @@ if($invite_type=='All')
 			
 			}
 			
-				if($gcmid!='' && $device_type=='A'){
+				if($gcmid!=''){
 				$Message['user_id']=$folloerdetails[0]['follower_user_id'];
 				$Message['title']='Ding Datt';
 				$Message['message']='You are invited for the Contest :'.$contestdetails[0]['contest_name'];
@@ -2382,13 +2408,7 @@ if($invite_type=='All')
                 $Message = array("notification"=>$Message);
                 $this->PushNotification($DeviceId, $Message);
 				
-				}else if($gcmid!='' && $device_type=='I'){
-						$DeviceId = $gcmid;
-						$Message = $folloerdetails[0]['follower_user_id'].'*You are invited for the Contest :'.$contestname;
-						$Message = str_replace(" ", "_", $Message);
-						$this->PushNotificationIos($DeviceId,$Message);
-					
-					} else { 
+				} else { 
 								
 					//$contestcreatedby= User::find($contestdetails[0]['createdby']);
 				
@@ -2431,37 +2451,29 @@ if($invite_type=='All')
 			
 			//return $groupmemberlist[0]['id'];
 			///
-		 /*$folloerdetails = followModel::select('user.firstname','user.lastname','user.username','user.ID as follower_user_id','user.gcm_id','user.email')->LeftJoin('user','user.ID','=','followers.followerid')->where('followers.id',$groupmemberlist[0]['id'])->get();
+		 $folloerdetails = followModel::select('user.firstname','user.lastname','user.username','user.ID as follower_user_id','user.gcm_id','user.email')->LeftJoin('user','user.ID','=','followers.followerid')->where('followers.id',$groupmemberlist[0]['id'])->get();
 		
 		if($folloerdetails[0]['firstname']!=''){ $name =$folloerdetails[0]['firstname'].' '.$folloerdetails[0]['lastname']; }else{ $name =$folloerdetails[0]['username'];} 
 		
 		  $gcmid = $folloerdetails[0]['gcm_id'];
-		  $email = $folloerdetails[0]['email']; */
-		  
-		  $user = ProfileModel::where('ID', $follower_id)->first();
-                if ($user['firstname'] != '')
-                    $name = $user['firstname'] . ' ' . $user['lastname'];
-                else
-                    $name = $user['username'];
-                $email = $user['email'];
-				$gcmid = $user['gcm_id'];
-				$device_type = $user['device_type'];
+		  $email = $folloerdetails[0]['email'];
+		
  	
 			if($contestdetails[0]['visibility']=='p')
 			{
-			                $privat_user['user_id']=$follower_id;
+			                $privat_user['user_id']=$folloerdetails[0]['follower_user_id'];
 							$privat_user['contest_id']=$contest_id;
 							$privat_user['requesteddate']=date('Y-m-d H:i:s');
 							$privat_user['status']=1;
-							$privatecontestcnt = privateusercontestModel::where('user_id',$follower_id)->where('contest_id',$contest_id)->get()->count();
+							$privatecontestcnt = privateusercontestModel::where('user_id',$folloerdetails[0]['follower_user_id'])->where('contest_id',$contest_id)->get()->count();
 							if($privatecontestcnt==0)
 							privateusercontestModel::create($privat_user);
 			
 			}
 			
 			
-				if($gcmid!='' && $device_type=='A'){
-				$Message['user_id']=$follower_id;
+				if($gcmid!=''){
+				$Message['user_id']=$folloerdetails[0]['follower_user_id'];
 				$Message['title']='Ding Datt';
 				$Message['message']='You are invited for the Contest :'.$contestdetails[0]['contest_name'];
 				$Message['contest_id']=$contest_id;
@@ -2470,13 +2482,7 @@ if($invite_type=='All')
                 $Message = array("notification"=>$Message);
                 $this->PushNotification($DeviceId, $Message);
 				
-				}else if($gcmid!='' && $device_type=='I'){
-						$DeviceId = $gcmid;
-						$Message = $follower_id.'*You are invited for the Contest :'.$contestname;
-						$Message = str_replace(" ", "_", $Message);
-						$this->PushNotificationIos($DeviceId,$Message);
-					
-					} else { 
+				} else { 
 								
 					//$contestcreatedby= User::find($contestdetails[0]['createdby']);
 				$this->invitefollowerforcontestmail($name,$email,$contestcreatedby,$contesttype,$contestname,$contest_id,$conteststartdate,$contestenddate,$contestimage);
@@ -2533,7 +2539,6 @@ for($k=0;$k<count($followers);$k++)
 				);
 			   $final=array("response"=>$Response,"followerlist"=>$followers);
 			   return json_encode($final);
-			 
 }
 
 public function forgotpassword()
@@ -2647,8 +2652,6 @@ public function participatedcontest()
 	$participants=contestparticipantModel::where('user_id',$userid)->lists('contest_id'); 
 	$participatedcontest=contestModel::select('ID','contest_name','themephoto','contestenddate','conteststartdate','votingstartdate','votingenddate','prize','createdby','description','noofparticipant')->whereIn('ID',$participants)->orderby('ID','DESC')->get();
 	
-
-	  
 	if(count($participants)!=0)
 	{
 	for($i=0; $i<count($participatedcontest);$i++){ 
@@ -2834,7 +2837,7 @@ public function addmemberintogroup()
 ///// This is accept both side requests ///////
 public function groupmemberaccepttheadminrequest()
 {
-
+	
 	$userid=Input::get('userid');
 	$groupid = Input::get('group_id');
 
@@ -3158,8 +3161,7 @@ public function getadminrequest(){
 	}
 	
 	function uninvitegroupsforcontest(){
-			
-
+				
 		$groupid = Input::get('group_id');
 		$contest_id = Input::get('contest_id');
 		$inv_suc_message =0;
@@ -3233,9 +3235,6 @@ public function getadminrequest(){
 				}
 				$inv_suc_message=1;
 			}
-			else{
-				$inv_suc_message=2;
-			}
 		} 
 		if($inv_suc_message==1){ 
 			$Response = array(
@@ -3245,15 +3244,6 @@ public function getadminrequest(){
 					);
 				$final=array("response"=>$Response);
 				return json_encode($final);				
-		}else if($inv_suc_message==2){
-			$Response = array(
-						'success' => '0',
-						'message' => 'You are not invited.So cant able to uninvite',
-						'msgcode' =>"c201",
-					);
-				$final=array("response"=>$Response);
-				return json_encode($final);
-
 		}else{ 
 			$Response = array(
 						'success' => '0',
@@ -3331,20 +3321,8 @@ return View::make('dropbox/dropbox');
         die('Curl failed: ' . curl_error($ch));
         }
         curl_close($ch);
-				
-		  
     
     }
-	
-	public function PushNotificationIos($DeviceId,$Message) 
-    {
-      
-    $ParentPemUrl = url()."/pushnotificationIOS.php?DeviceId=".$DeviceId."&Message=".$Message;
-    $TriggerParent = file_get_contents($ParentPemUrl);
-    #exit;    
-   
-    }
-	
 	function fetchUrl($path)
     {
         //sadly, https doesn't work out of the box on windows for functions

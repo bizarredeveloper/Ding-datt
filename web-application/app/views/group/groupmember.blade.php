@@ -457,9 +457,7 @@ if (Session::has('Message')) {
                             ?></td> 
                             <?php if ($showjoinbtn == 'no') { ?><td <?php if ($contestdetails['createdby'] != $savegroupmembers[$i]['user_id']) { ?> class="invitetype_<?php echo $savegroupmembers[$i]['groupmemberid']; ?> invitetypeall" id="invitetype" <?php } ?>> 
 
-                                <?php 
-								//$contestdetails['createdby'] != 1 
-								if ($contestdetails['createdby'] != $savegroupmembers[$i]['user_id'] && $savegroupmembers[$i]['user_id'] != 1) {
+                                <?php if ($contestdetails['createdby'] != $savegroupmembers[$i]['user_id'] && $contestdetails['createdby'] != 1 && $savegroupmembers[$i]['user_id'] != 1) {
                                     if ($invited > 0) {
                                         echo "<font style='color:red;' id='yy' class='asas' >Invited</font>";
                                     } else {

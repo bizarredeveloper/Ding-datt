@@ -44,7 +44,7 @@ class followController extends BaseController {
 				<div style="background:#ffffff;float:left;padding:10px 20px;margin:1px 1%;" >
 					<div class="thank" style="font-size:16px;color: #078AC2;font-weight:bold;float:left;width:100%;margin-top:10px;text-align:left;">Dear '.$followingusername.'</div>
 					
-					<div style="font-size:12px;	color: #000000;	float:left;padding:10px 2px;width:100%;margin:15px;">The Member '.$username.' is following you.
+					<div style="font-size:12px;	color: #000000;	float:left;padding:10px 2px;width:100%;margin:15px;">The Member.'.$username.'. is following you.
 			 </div>
 					
 					<div style="margin:10px;"><a href="'.URL().'"><img src="'.URL::to('assets/inner/images/vist_dingdatt.png').'" width="120" height="30" /></a>

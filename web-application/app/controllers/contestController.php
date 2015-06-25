@@ -104,35 +104,6 @@ class contestController extends BaseController {
 					if(count($userInterest) < 1)
 					{
 						contestinterestModel::create($interes);
-						/// Vew enhanchment for interest send push notification to appropriate user ////
-						
-						$pushnotificationdetail = userinterestModel::select('user.firstname','user.lastname','user.username','user.ID','user.email','user.gcm_id','user.device_type','user.timezone')->LeftJoin('user','user.ID','=','user_interest.user_id')->where('interest_id',$interest[$i])->get();
-							for($j=0; $j<count($pushnotificationdetail); $j++){
-							
-								if(Auth::user()->ID==1){
-								
-									if($pushnotificationdetail[$j]['firstname']!=''){ $name = $pushnotificationdetail[$j]['firstname'].' '.$pushnotificationdetail[$j]['lastname']; }else{ $name = $pushnotificationdetail[$j]['username']; }
-									$email = $pushnotificationdetail[$j]['email'];
-									$gcm_id = $pushnotificationdetail[$j]['gcm_id'];
-									$device_type = $pushnotificationdetail[$j]['device_type'];
-									$uid = $pushnotificationdetail[$j]['ID'];
-									$contestname = Input::get('contest_name');
-									$contesttype = Input::get('contesttype');
-									$contestimage = $Image_them;
-																		
-									$conteststartdate = timezoneModel::convert($inputdetails['conteststartdate'],'UTC',$pushnotificationdetail[$j]['timezone'], 'd-m-Y h:i:s');
-																		
-									$contestenddate = timezoneModel::convert($inputdetails['contestenddate'],'UTC',$pushnotificationdetail[$j]['timezone'], 'd-m-Y h:i:s');
-									
-									$this -> Inviteforcontestintest($name,$email,$gcm_id,$device_type,$uid,$interest[$i],$contestname,$contest_id,$contesttype,$contestimage,$conteststartdate,$contestenddate);					
-								}
-							}					
-						
-						//
-						//$interest[$i]
-						
-						
-						
 					}
 					unset($interes);
 				}
@@ -754,8 +725,7 @@ return  Redirect::to("contest_info/".$contest_id)->with('tab','gallery')->with('
 public function contesttabwithoutid(){
 $contest_id = Input::get('contest_id');
 
-//return  Redirect::to("contest_info/".$contest_id)->with('tab','gallery');
-return  Redirect::to("contest_info/".$contest_id);
+return  Redirect::to("contest_info/".$contest_id)->with('tab','gallery');
 
 }
 public function contestinforesponsive()
@@ -951,33 +921,6 @@ $download_url = $json_response['url'].'?dl=1';
 						$message->to($email);
 						$message->subject('Dingdatt-contest information');
 					});  
-	}
-	function Inviteforcontestintest($name,$email,$gcmid,$device_type,$uid,$interest_id,$contestname,$contest_id,$contesttype,$contestimage,$conteststartdate,$contestenddate){
-	
-
-	/* $interestname = InterestCategoryModel::where('Interest_id',$interest_id)->first();
-	$interestname = $interestname['Interest_name'];
-	
-					if ($gcmid != '' && $device_type=='A') {
-                        $Message['user_id'] = $uid;
-                        $Message['title'] = 'Ding Datt';
-                        $Message['message'] = 'You are invited for the Contest :' . $contestname;
-                        $Message['contest_id'] = $contest_id;
-                        $Message = array("notification" => $Message);
-                        $DeviceId = array($gcmid);
-                        $Message = array("notification" => $Message);
-                        $this->PushNotification($DeviceId, $Message);
-                    }else if($gcmid!='' && $device_type=='I'){
-						$DeviceId = $gcmid;
-						$Message = 'You are invited for the Contest :'.$contestname;
-						$Message = str_replace(" ", "_", $Message);
-						$this->PushNotificationIos($DeviceId,$Message);
-					
-					} else {
-                        $this->invitegroupmemberforcontestmail($email, $name, $contesttype, $contestname, $contest_id, $contestimage, $conteststartdate, $contestenddate);
-					} 
-		*/
-	
 	}
 }
 ?>
