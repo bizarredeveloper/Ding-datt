@@ -19,7 +19,7 @@ class ajaxController extends BaseController {
 
         if ($subtab == "tab4") {
             if (isset($tsearch) && $tsearch != '' && $interest == '') { ///// current with search ////
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where(function($query) {
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where(function($query) {
                                     $query->where(function($query) {
                                         $currentdate = date('Y-m-d H:i:s');
                                         $query->where('conteststartdate', '<=', $currentdate);
@@ -34,7 +34,7 @@ class ajaxController extends BaseController {
                                 ->where('contest.contesttype', $contest_type)->where('contest_name', 'like', '%' . $tsearch . '%')->where('contest.status', '1')->where('visibility', 'u')->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)->get();
             } else if (isset($tsearch) && $tsearch != '' && $interest != '') {
 
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where(function($query) {
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where(function($query) {
                                     $query->where(function($query) {
                                         $currentdate = date('Y-m-d H:i:s');
                                         $query->where('conteststartdate', '<=', $currentdate);
@@ -50,7 +50,7 @@ class ajaxController extends BaseController {
                                 ->where('contest.contesttype', $contest_type)->where('contest_name', 'like', '%' . $tsearch . '%')->where('contest.status', '1')->where('visibility', 'u')->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)->get();
             } else if (isset($interest) && $interest != '') {
 
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where(function($query) {
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where(function($query) {
                                     $query->where(function($query) {
                                         $currentdate = date('Y-m-d H:i:s');
                                         $query->where('conteststartdate', '<=', $currentdate);
@@ -66,7 +66,7 @@ class ajaxController extends BaseController {
                                 ->where('contest.contesttype', $contest_type)->where('contest.status', '1')->where('visibility', 'u')->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)->get();
             } else { ///// current without search ////
 
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where(function($query) {
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where(function($query) {
                                     $query->where(function($query) {
                                         $currentdate = date('Y-m-d H:i:s');
                                         $query->where('conteststartdate', '<=', $currentdate);
@@ -82,28 +82,28 @@ class ajaxController extends BaseController {
             }
         } elseif ($subtab == "tab5") {
             if (isset($tsearch) && $tsearch != '') { ///// upcoming with search ////
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where('conteststartdate', '>', $currentdate)
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where('conteststartdate', '>', $currentdate)
                         ->where('contesttype', $contest_type)
                         ->where('contest_name', 'like', '%' . $tsearch . '%')
                         ->where('contest.status', '1')
                         ->where('visibility', 'u')->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
                         ->get();
             } else if (isset($tsearch) && $tsearch != '' && $interest != '') {
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where('conteststartdate', '>', $currentdate)
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where('conteststartdate', '>', $currentdate)
                         ->where('contesttype', $contest_type)
                         ->where('contest_name', 'like', '%' . $tsearch . '%')
                         ->where('contest.status', '1')->LeftJoin('contest_interest_categories', 'contest_interest_categories.contest_id', '=', 'contest.ID')->where('contest_interest_categories.category_id', $interest)
                         ->where('visibility', 'u')->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
                         ->get();
             } else if (isset($interest) && $interest != '') {
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where('conteststartdate', '>', $currentdate)
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where('conteststartdate', '>', $currentdate)
                         ->where('contesttype', $contest_type)
                         ->where('contest.status', '1')->LeftJoin('contest_interest_categories', 'contest_interest_categories.contest_id', '=', 'contest.ID')->where('contest_interest_categories.category_id', $interest)
                         ->where('visibility', 'u')->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
                         ->get();
             } else { ///// upcoming without search ////
 
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where('conteststartdate', '>', $currentdate)
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where('conteststartdate', '>', $currentdate)
                         ->where('contesttype', $contest_type)
                         ->where('contest.status', '1')
                         ->where('visibility', 'u')->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
@@ -111,7 +111,7 @@ class ajaxController extends BaseController {
             }
         } elseif ($subtab == "tab6") {
             if (isset($tsearch) && $tsearch != '' && $interest == '') { ///// Archieve with search ////
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where('contestenddate', '<', $currentdate)
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where('contestenddate', '<', $currentdate)
                         ->where('votingenddate', '<', $currentdate)
                         ->where('contesttype', $contest_type)
                         ->where('contest_name', 'like', '%' . $tsearch . '%')
@@ -120,7 +120,7 @@ class ajaxController extends BaseController {
                         ->get();
             } else if (isset($tsearch) && $tsearch != '' && $interest != '') {
 
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where('contestenddate', '<', $currentdate)
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where('contestenddate', '<', $currentdate)
                         ->where('votingenddate', '<', $currentdate)
                         ->where('contesttype', $contest_type)
                         ->where('contest_name', 'like', '%' . $tsearch . '%')->LeftJoin('contest_interest_categories', 'contest_interest_categories.contest_id', '=', 'contest.ID')->where('contest_interest_categories.category_id', $interest)
@@ -129,7 +129,7 @@ class ajaxController extends BaseController {
                         ->get();
             } else if (isset($interest) && $interest != '') {
 
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where('contestenddate', '<', $currentdate)
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where('contestenddate', '<', $currentdate)
                         ->where('votingenddate', '<', $currentdate)
                         ->where('contesttype', $contest_type)
                         ->LeftJoin('contest_interest_categories', 'contest_interest_categories.contest_id', '=', 'contest.ID')->where('contest_interest_categories.category_id', $interest)
@@ -137,7 +137,7 @@ class ajaxController extends BaseController {
                         ->where('visibility', 'u')->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
                         ->get();
             } else {  ///// Archieve without search ////
-                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name')->where('contestenddate', '<', $currentdate)
+                $photocontest = contestModel::select('contest.themephoto', 'contest.contestenddate', 'contest.ID', 'contest.contest_name','contest.createdby')->where('contestenddate', '<', $currentdate)
                         ->where('votingenddate', '<', $currentdate)
                         ->where('contesttype', $contest_type)
                         ->where('contest.status', '1')
@@ -149,7 +149,7 @@ class ajaxController extends BaseController {
                 $photocontest = contestModel::where('visibility', 'p')
                         ->where('contesttype', $contest_type)
                         ->where('contest_name', 'like', '%' . $tsearch . '%')
-                        ->select('contest.ID', 'contest_name', 'themephoto', 'contestenddate', 'description', 'noofparticipant')
+                        ->select('contest.ID', 'contest_name', 'themephoto', 'contestenddate', 'description', 'noofparticipant','contest.createdby')
                         ->leftJoin('private_contest_users', 'private_contest_users.contest_id', '=', 'contest.ID')
                         ->where('private_contest_users.user_id', Auth::User()->ID)->where('contest.status', 1)->where('private_contest_users.status', '1')->distinct()->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
                         ->get();
@@ -158,14 +158,14 @@ class ajaxController extends BaseController {
                 $photocontest = contestModel::where('visibility', 'p')
                         ->where('contesttype', $contest_type)
                         ->where('contest_name', 'like', '%' . $tsearch . '%')
-                        ->select('contest.ID', 'contest_name', 'themephoto', 'contestenddate', 'description', 'noofparticipant')
+                        ->select('contest.ID', 'contest_name', 'themephoto', 'contestenddate', 'description', 'noofparticipant','contest.createdby')
                         ->leftJoin('private_contest_users', 'private_contest_users.contest_id', '=', 'contest.ID')->LeftJoin('contest_interest_categories', 'contest_interest_categories.contest_id', '=', 'contest.ID')->where('contest_interest_categories.category_id', $interest)
                         ->where('private_contest_users.user_id', Auth::User()->ID)->where('contest.status', 1)->where('private_contest_users.status', '1')->distinct()->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
                         ->get();
             } else if (isset($interest) && $interest != '') {
                 $photocontest = contestModel::where('visibility', 'p')
                         ->where('contesttype', $contest_type)
-                        ->select('contest.ID', 'contest_name', 'themephoto', 'contestenddate', 'description', 'noofparticipant')
+                        ->select('contest.ID', 'contest_name', 'themephoto', 'contestenddate', 'description', 'noofparticipant','contest.createdby')
                         ->leftJoin('private_contest_users', 'private_contest_users.contest_id', '=', 'contest.ID')->LeftJoin('contest_interest_categories', 'contest_interest_categories.contest_id', '=', 'contest.ID')->where('contest_interest_categories.category_id', $interest)
                         ->where('private_contest_users.user_id', Auth::User()->ID)->where('contest.status', 1)->where('private_contest_users.status', '1')->distinct()->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
                         ->get();
@@ -173,7 +173,7 @@ class ajaxController extends BaseController {
 
                 $photocontest = contestModel::where('visibility', 'p')
                         ->where('contesttype', $contest_type)
-                        ->select('contest.ID', 'contest_name', 'themephoto', 'contestenddate', 'description', 'noofparticipant')
+                        ->select('contest.ID', 'contest_name', 'themephoto', 'contestenddate', 'description', 'noofparticipant','contest.createdby')
                         ->leftJoin('private_contest_users', 'private_contest_users.contest_id', '=', 'contest.ID')->LeftJoin('contest_interest_categories', 'contest_interest_categories.contest_id', '=', 'contest.ID')
                         ->where('private_contest_users.user_id', Auth::User()->ID)->where('contest.status', 1)->where('private_contest_users.status', '1')->distinct()->leftJoin('user', 'user.ID', '=', 'contest.createdby')->where('user.status', 1)
                         ->get();
@@ -181,6 +181,7 @@ class ajaxController extends BaseController {
         }
         $contestcount = count($photocontest);
         $return_string = "";
+		$loginuser = Auth::user()->ID;
         for ($i = 0; $i < $contestcount; $i++) {
 
             if (strlen($photocontest[$i]['contest_name']) < 20) {
@@ -188,7 +189,10 @@ class ajaxController extends BaseController {
             } else {
                 $contest_name = substr(($photocontest[$i]['contest_name']), 0, 20) . "...";
             }
-            $return_string .= "<div class='crsl-item' " . (($i >= 14) ? "style='display:none'" : "") . ">
+			
+			$backgroundclr = (($photocontest[$i]['createdby']==$loginuser)? "style='border:5px solid rgb(82, 195, 16)'":"");
+			
+            $return_string .= "<div class='crsl-item' " . (($i >= 14) ? "style='display:none'" : "") .$backgroundclr. " >
 			  <div class='thumbnail'>
 				<a href='" . URL::to('contest_info/' . $photocontest[$i]['ID']) . "' >
 					<img src='" . URL::to('public/assets/upload/contest_theme_photo/' . $photocontest[$i]['themephoto']) . "' alt='nyc subway'>
@@ -265,9 +269,27 @@ class ajaxController extends BaseController {
                         $groupname = $groupname->groupname;
 
 
-
+						$gcmid = $user['gcm_id'];
+					$device_type = $user['device_type'];
+                    ///
+                    if ($gcmid != '' && $device_type=='A') {
+                        $Message['user_id'] = $group_members[$i]['user_id'];
+                        $Message['title'] = 'Ding Datt';
+                        $Message['message'] = 'You are invited for the Contest :' . $contestname;
+                        $Message['contest_id'] = $contest_id;
+                        $Message = array("notification" => $Message);
+                        $DeviceId = array($gcmid);
+                        $Message = array("notification" => $Message);
+                        $this->PushNotification($DeviceId, $Message);
+                    }else if($gcmid!='' && $device_type=='I'){
+						$DeviceId = $gcmid;
+						$Message = 'You are invited for the Contest :'.$contestname;
+						$Message = str_replace(" ", "_", $Message);
+						$this->PushNotificationIos($DeviceId,$Message);
+					
+					} else {
                         $this->invitegroupmemberforcontestmail($email, $inviter, $contesttype, $contestname, $contest_id, $groupname, $contestimage, $conteststartdate, $contestenddate);
-
+					}
                         if ($invvitedsata)
                             $inv_suc_message = 1;
                     }
@@ -347,8 +369,9 @@ class ajaxController extends BaseController {
                         $name = $user['username'];
                     $email = $user['email'];
                     $gcmid = $user['gcm_id'];
+					$device_type = $user['device_type'];
                     ///
-                    if ($gcmid != '') {
+                    if ($gcmid != '' && $device_type=='A') {
                         $Message['user_id'] = $groupmemberid['user_id'];
                         $Message['title'] = 'Ding Datt';
                         $Message['message'] = 'You are invited for the Contest :' . $contestname;
@@ -357,7 +380,13 @@ class ajaxController extends BaseController {
                         $DeviceId = array($gcmid);
                         $Message = array("notification" => $Message);
                         $this->PushNotification($DeviceId, $Message);
-                    } else {
+                    }else if($gcmid!='' && $device_type=='I'){
+						$DeviceId = $gcmid;
+						$Message = 'You are invited for the Contest :'.$contestname;
+						$Message = str_replace(" ", "_", $Message);
+						$this->PushNotificationIos($DeviceId,$Message);
+					
+					} else {
                         $this->invitegroupmemberforcontestmail($email, $contestcreatedby, $contesttype, $contestname, $contest_id, $groupname, $contestimage, $conteststartdate, $contestenddate);
                     }
                     $inv_suc_message = 1;
@@ -653,8 +682,36 @@ class ajaxController extends BaseController {
                 else
                     $name = $user['username'];
                 $email = $user['email'];
-                $sendmail = $this->invitefollowerforcontestmail($name, $email, $inviter, $contesttype, $contestname, $contest_id);
-            }
+				
+                $gcmid = $user['gcm_id'];
+					$device_type = $user['device_type'];
+                    ///
+                    if ($gcmid != '' && $device_type=='A') {
+                        $Message['user_id'] = $groupmemberid['user_id'];
+                        $Message['title'] = 'Ding Datt';
+                        $Message['message'] = 'You are invited for the Contest :' . $contestname;
+                        $Message['contest_id'] = $contest_id;
+                        $Message = array("notification" => $Message);
+                        $DeviceId = array($gcmid);
+                        $Message = array("notification" => $Message);
+                        $this->PushNotification($DeviceId, $Message);
+                    }else if($gcmid!='' && $device_type=='I'){
+						$DeviceId = $gcmid;
+						$Message = 'You are invited for the Contest :'.$contestname;
+						$Message = str_replace(" ", "_", $Message);
+						$this->PushNotificationIos($DeviceId,$Message);
+					
+					} else {
+					
+					 $contestimage = $contest_det['themephoto'];
+
+					$conteststartdate = $contest_det['conteststartdate'];
+					$contestenddate = $contest_det['contestenddate'];
+					
+					//$name, $email, $contestcreatedby, $contesttype, $contestname, $contest_id,$contestimage,$conteststartdate,$contestenddate
+				$sendmail = $this->invitefollowerforcontestmail($name, $email, $inviter, $contesttype, $contestname, $contest_id,$contestimage,$conteststartdate,$contestenddate);
+				}
+			}
             return 1;
         }
         else {
@@ -857,7 +914,7 @@ class ajaxController extends BaseController {
 
 
         Mail::send([], array('email' => $email, 'contestcreatedby' => $contestcreatedby, 'contesttype' => $contesttype, 'contestname' => $contestname, 'contest_id' => $contest_id, 'groupname' => $groupname, 'contestimage' => $contestimage, 'conteststartdate' => $conteststartdate, 'contestenddate' => $contestenddate), function($message) use ($email, $contestcreatedby, $contesttype, $contestname, $contest_id, $groupname, $contestimage, $conteststartdate, $contestenddate) {
-            $mail_body = '<style>.thank{text-align:center; width:100%;}
+            /* $mail_body = '<style>.thank{text-align:center; width:100%;}
 								.but_color{color:#ffffff;}
 								.cont_name{width:100px;}
 								.cont_value{width:500px;}
@@ -928,6 +985,102 @@ class ajaxController extends BaseController {
 							</table>
 							</div>
 														
+							<div style="font-size:12px; margin-top:10px;color: #5b5b5b;width:95%;vertical-align: text-middle;height:30px;margin:0% 1%;padding:0px 15px; border-top:#005377 1px solid; border-bottom:5px solid background:#e5e5e5;line-height:25px; ">
+							<span style="font-size:12px;color: #5b5b5b;padding:0px 10px;line-height:22px;text-align:center;">This is auto generated mail and do not reply to this mail.</span>
+							</body>'; */
+							
+							$mail_body = '<style>.thank{text-align:center; width:100%;}
+								.but_color{color:#ffffff;}
+								.cont_name{width:100px;}
+								.cont_value{width:500px;}
+								
+								
+								
+								</style>
+						 <body style=" margin:0px auto; padding:0px;">
+
+							<div style="margin:0px auto;background:#e5e5e5;float:left;	width:98%;	height:30px;margin:0px 1%;  border-bottom:#005377 1px solid;vertical-align: text-middle;">
+								&nbsp;&nbsp;<a href="'.URL::to('contest_info/'.$contest_id).'"><img src="'.URL::to('assets/images/logo.png').'" style="margin-top:3px;width: 100px;height: 20px;line-height:20px;" /></a>&nbsp;&nbsp;
+							</div>
+							<div style="background:#ffffff;float:left;padding:10px 20px;margin:1px 1%;" >
+								<div class="thank" style="font-size:16px;color: #078AC2;font-weight:bold;float:left;width:100%;margin-top:10px;text-align:center;">Thank you for joining us</div>
+								<div style="font-size:14px;	color: #D79600;	font-weight:bold;float:left;padding:10px 2px;width:100%;margin-bottom:5px;">Contest Details</div>
+								
+								<table  >
+									<tr>
+										<td colspan="2" width="250" height="220" valign="top" style="top:0px;" >
+											<table valign="middle">
+												<tr>
+													<td align="center" style="border:#cccccc 1px solid;">
+													
+														<img src="'.URL::to('public/assets/upload/contest_theme_photo/'.$contestimage).'" width="230" height="200" />
+													</td>
+												</tr>
+											
+											</table>
+										</td>
+										<td>
+								<table width="500" height="95" border="0" style="margin-bottom:10px;float:left;" border="1" cellspacing="0" cellpadding="0">
+							  <tr>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Contest Name:</span></td>
+								<td valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$contestname.'</span></td>
+							  </tr>
+							  <tr>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Contest Type:</span></td>
+								<td  valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$contesttype.'</span></td>
+							  </tr>
+							  
+							   <tr>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Created By:</span></td>
+								<td  valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$contestcreatedby.'</span></td>
+							  </tr>
+							   
+							  <tr>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Start Date:</span></td>
+								<td valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$conteststartdate.'</span></td>
+							  </tr>
+							  <tr>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">End Date: </span></td>
+								<td valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$contestenddate.'</span></td>
+							  </tr>
+							  <tr>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Group Name:</td>
+								<td valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">' . $groupname . '</td>
+							  </tr>
+							  							   			  
+							  
+							</table>
+							<p></p></br>
+							<a href="'.URL::to('contest_info/'.$contest_id).'"><img src="'.URL::to('assets/inner/images/vist_dingdatt.png').'" width="120" height="30" /></a>
+							</td>									
+							</tr>
+							</table>
+							</div>
+														
 							<div style="font-size:12px; margin-top:10px;color: #5b5b5b;/*	background:#e5e5e5;*/width:95%;vertical-align: text-middle;height:30px;margin:0% 1%;padding:0px 15px; border-top:#005377 1px solid; border-bottom:5px solid background:#e5e5e5;line-height:25px; ">
 							<span style="font-size:12px;color: #5b5b5b;padding:0px 10px;line-height:22px;text-align:center;">This is auto generated mail and do not reply to this mail.</span>
 							</body>';
@@ -938,65 +1091,107 @@ class ajaxController extends BaseController {
         });
     }
 
-    public function invitefollowerforcontestmail($name, $email, $contestcreatedby, $contesttype, $contestname, $contest_id) {
-        Mail::send([], array('name' => $name, 'email' => $email, 'contestcreatedby' => $contestcreatedby, 'contesttype' => $contesttype, 'contestname' => $contestname, 'contest_id' => $contest_id), function($message) use ($name, $email, $contestcreatedby, $contesttype, $contestname, $contest_id) {
+    public function invitefollowerforcontestmail($name, $email, $contestcreatedby, $contesttype, $contestname, $contest_id,$contestimage,$conteststartdate,$contestenddate) {
+        Mail::send([], array('name' => $name, 'email' => $email, 'contestcreatedby' => $contestcreatedby, 'contesttype' => $contesttype, 'contestname' => $contestname, 'contest_id' => $contest_id,'contestimage' =>$contestimage,'conteststartdate'=>$conteststartdate,'contestenddate'=>$contestenddate), function($message) use ($name, $email, $contestcreatedby, $contesttype, $contestname, $contest_id,$contestimage,$conteststartdate,$contestenddate) {
 
-            $mail_body = '<body style="font-family:Helvetica Neue, Helvetica, Arial, sans-serif; margin:0px auto; padding:0px;">
+            $mail_body = '<style>.thank{text-align:center; width:100%;}
+								.but_color{color:#ffffff;}
+								.cont_name{width:100px;}
+								.cont_value{width:500px;}
+								
+								
+								
+								</style>
+						 <body style=" margin:0px auto; padding:0px;">
 
-							<div style="margin:0px auto;padding:0px;background:#e5e5e5;float:left;	width:98%;	height:auto;margin:0px 1%;  border-bottom:#005377 1px solid;">
-								<a href="' . URL::to('contest_info/' . $contest_id) . '"><img src="' . URL::to('assets/images/logo.png') . '" style="padding: 1px 10px;width: 100px;height: 20px;" /></a>
+							<div style="margin:0px auto;background:#e5e5e5;float:left;	width:98%;	height:30px;margin:0px 1%;  border-bottom:#005377 1px solid;vertical-align: text-middle;">
+								&nbsp;&nbsp;<a href="'.URL::to('contest_info/'.$contest_id).'"><img src="'.URL::to('assets/images/logo.png').'" style="margin-top:3px;width: 100px;height: 20px;line-height:20px;" /></a>&nbsp;&nbsp;
 							</div>
 							<div style="background:#ffffff;float:left;padding:10px 20px;margin:1px 1%;" >
-								<div style="font-size:16px;color: #078AC2;font-weight:bold;float:left;width:100%;	text-align:center;">Thank you for joining us</div>
-								<div style="font-size:14px;	color: #D79600;	font-weight:bold;float:left;padding:10px 0px;width:100%;">Contest Details</div>
-																	
-															<div style="background:#ffffff;float:left;padding:10px 20px;margin:1px 1%;" >
-								<div style="font-size:16px;color: #078AC2;font-weight:bold;float:left;width:100%;margin-top:10px;text-align:center;">Thank you for joining us</div>
-								<div style="font-size:14px;	color: #D79600;	font-weight:bold;float:left;padding:10px 0px;width:100%;margin-bottom:5px;">Contest Details</div>
-								<div style="float:left; width:200px;height:150px;padding-right:2%;>
-									<img src="' . URL::to('assets/images/3.jpg') . '" style="width:100%; height:auto;/> 
-								</div>
+								<div class="thank" style="font-size:16px;color: #078AC2;font-weight:bold;float:left;width:100%;margin-top:10px;text-align:center;">Thank you for joining us</div>
+								<div style="font-size:14px;	color: #D79600;	font-weight:bold;float:left;padding:10px 2px;width:100%;margin-bottom:5px;">Contest Details</div>
 								
-								<div styel"float:left;">
-								<table width="180" height="95" border="0" style="margin-bottom:10px;float:left;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;">
+								<table  >
+									<tr>
+										<td colspan="2" width="250" height="220" valign="top" style="top:0px;" >
+											<table valign="middle">
+												<tr>
+													<td align="center" style="border:#cccccc 1px solid;">
+													
+														<img src="'.URL::to('public/assets/upload/contest_theme_photo/'.$contestimage).'" width="230" height="200" />
+													</td>
+												</tr>
+											
+											</table>
+										</td>
+										<td>
+								<table width="500" height="95" border="0" style="margin-bottom:10px;float:left;" border="1" cellspacing="0" cellpadding="0">
 							  <tr>
-								<td style="font-size:12px;color: #3BBA00;font-weight:bold;">Contest Name:</td>
-								<td style="font-size:12px;color: #5d5d5d;font-weight:bold;">' . $contestname . '</td>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Contest Name:</span></td>
+								<td valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$contestname.'</span></td>
 							  </tr>
 							  <tr>
-								<td style="font-size:12px;color: #3BBA00;font-weight:bold;">Contest Type:</td>
-								<td style="font-size:12px;color: #5d5d5d;font-weight:bold;">' . $contesttype . '</td>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Contest Type:</span></td>
+								<td  valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$contesttype.'</span></td>
 							  </tr>
 							   <tr>
-								<td style="font-size:12px;color: #3BBA00;font-weight:bold;">Created By:</td>
-								<td style="font-size:12px;color: #5d5d5d;font-weight:bold;">' . $contestcreatedby . '</td>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Created By:</span></td>
+								<td  valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$contestcreatedby.'</span></td>
 							  </tr>
-							  
-							  
-							  <tr style="border-radius:6px;-webkit-border-radius: 5px; -moz-border-radius: 5px;">
-                              	<td colspan="2" style="vertical-align: text-middle;" >
-                                	<span><a href="' . URL::to('contest_info/' . $contest_id) . '" style="text-decoration:none;><img src="' . URL::to('assets/inner/images/vist_dingdatt.png') . '/assets/inner/images/vist_dingdatt.png" width="120" height="30" /></a></span>
-								
-                            	</td>
-                              </tr>					  
+							   
+							  <tr>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">Start Date:</span></td>
+								<td valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$conteststartdate.'</span></td>
+							  </tr>
+							  <tr>
+								<td valign=top style="width:101.9pt;border:solid black 1.0pt;
+  background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">End Date: </span></td>
+								<td valign=top style="width:250pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt"><span style="font-size:11.0pt;font-family:"Calibri","sans-serif";
+  color:#1F497D">'.$contestenddate.'</span></td>
+							  </tr>
+							  							   			  
 							  
 							</table>
-
-							</div>
-
-
-							</div>
-
+							<p></p></br>
+							<a href="'.URL::to('contest_info/'.$contest_id).'"><img src="'.URL::to('assets/inner/images/vist_dingdatt.png').'" width="120" height="30" /></a>
+							</td>									
+							</tr>
+							</table>
 							</div>
 														
 							<div style="font-size:12px; margin-top:10px;color: #5b5b5b;/*	background:#e5e5e5;*/width:95%;vertical-align: text-middle;height:30px;margin:0% 1%;padding:0px 15px; border-top:#005377 1px solid; border-bottom:5px solid background:#e5e5e5;line-height:25px; ">
-							<span style="font-size:12px;color: #5b5b5b;padding:0px 10px;line-height:22px;text-align:center;">This is auto generated mail and do not reply to this mail.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-							</div>		
+							<span style="font-size:12px;color: #5b5b5b;padding:0px 10px;line-height:22px;text-align:center;">This is auto generated mail and do not reply to this mail.</span>
 							</body>';
             $message->setBody($mail_body, 'text/html');
             $message->to($email);
             $message->subject('Dingdatt-Invitation for join the contest');
         });
+    }
+		public function PushNotificationIos($DeviceId,$Message) 
+    {
+      
+    $ParentPemUrl = url()."/pushnotificationIOS.php?DeviceId=".$DeviceId.'&Message='.$Message;
+    $TriggerParent = file_get_contents($ParentPemUrl);
+    #exit;    
+   
     }
 
 }

@@ -114,6 +114,8 @@ $assets_path = "assets/inner/";
 		var imageheight = $('.cont_img_con img')[0].height; console.log(imageheight);
 		imageheight = imageheight + 250;
 		$('.contest_subpage').css('height', imageheight);
+		
+		
 		var adminlogin = '<?php if (Auth::user()->ID == 1) echo 1; 	else echo 0; ?>'
 		if (adminlogin == 1){
 			$('.ib-nav').addClass('ib-nav1').removeClass('ib-nav');
@@ -428,6 +430,9 @@ if ($contestdetails->visibility == 'p') {
         privateusercontestModel::create($private_cont);
     }
 }
+		$user_id = Auth::user()->ID;
+		$old_cont_value = contestparticipantModel::where('contest_id', $contest_id)->where('user_id', $user_id)->first();
+		$old_cont_count = count($old_cont_value);
 ?>
 <div class="tabs-wrapper"> <input type="hidden" class="contest_id" value="{{ $contest_id }}" />
     <input type="radio" name="tab" id="tab1" class="tab-head" onclick="showhide_subtab('{{$contest_id}}');" <?php
@@ -442,7 +447,7 @@ if ($contestdetails->visibility == 'p') {
         echo "checked";
     }
         ?> />
-        <label for="tab2" id="txt_join">Join</label><!-- class="act_sel"-->
+        <?php if($old_cont_count>0) { ?><label for="tab2" >Update</label> <?php  }else { ?><label for="tab2" id="txt_join">Join</label> <?php } ?><!-- class="act_sel"-->
         <?php
     }
     ?>
@@ -484,13 +489,13 @@ if ($contestdetails->visibility == 'p') {
     }
     ?>
     <?php
-    if ($curdate < $contestdetails['contestenddate']) {
+   // if ($curdate < $contestdetails['contestenddate']) {
         ?>
         <input type="radio" name="tab" id="tab7" onclick="showhide_subtab('{{$contest_id}}');" class="tab-head" />
         <label for="tab7" id="txt_share">Share</label>
 
             <?php
-        }
+     //   }
         ?>
     <div id="subtab_div" class="con_cat_right mbnone" <?php if ($tab != "invite") { ?> style="display:none" <?php } ?>>
         <input type="radio" name="subtab" id="tab8" onclick="showhide_subtab('{{$contest_id}}');" <?php
@@ -634,9 +639,8 @@ if ($contestdetails['createdby'] == Auth::user()->ID && $curdate < $contestdetai
                 <div class="cont_des_con">
                     <strong>
                             <?php
-                            $user_id = Auth::user()->ID;
-                            $old_cont_value = contestparticipantModel::where('contest_id', $contest_id)->where('user_id', $user_id)->first();
-                            $old_cont_count = count($old_cont_value);
+
+
                             if ($contestdetails['contesttype'] == "p") {
                                 echo ($old_cont_count > 0) ? "Change Participating Photo" : "Upload Participating Photo";
                             } elseif ($contestdetails['contesttype'] == "v") {
@@ -670,44 +674,50 @@ if ($contestdetails['createdby'] == Auth::user()->ID && $curdate < $contestdetai
 					}
 				</script>
 
-                                <textarea name="uploadtopic" id="uploadtopic" cols="100" rows="15" class="radius" style="margin-left:-50%">{{ isset($old_cont_value['uploadtopic'])?$old_cont_value['uploadtopic']:"" }}</textarea>
+                                <textarea name="uploadtopic" id="uploadtopic" class="radius txt_size">{{ isset($old_cont_value['uploadtopic'])?$old_cont_value['uploadtopic']:"" }}</textarea>
 
     <?php
     $topicphoto = url() . '/public/assets/upload/topicphotovideo/' . $old_cont_value['topicphoto'];
 
     $topicvideo = url() . '/public/assets/upload/topicphotovideo/' . $old_cont_value['topicvideo'];
     ?>
+							
                                 <div>
+								<div class="topic_cls">
                                     <div class="topic_imgcls">
-                                        <label class="myLabel topic_img">
+                                        <label class="myLabel topic_img bloc">
                                             <img src="{{ (isset($old_cont_value['topicphoto'])&&$contestdetails['contesttype']=='t')?($topicphoto):(URL::to('assets/inner/img/join_gallery.png')) }}" class="roundedimg roundedimgtopic">
                                             <input type="file" name="topicphoto" class="jointopicimage"  onchange="updateuploadtopicimg(this.value)" >
                                         </label>
                                         <div class="clrsec"></div>
                                         <span class="chose_file">Select from Gallery</span>
                                     </div>
-
-                                    <div>
-                                        <?php  if($old_cont_value['topicvideo']!=''){?>
+							<?php 
+                                         if($old_cont_value['topicvideo']!=''){?>
 										 <video class="topic_vidcls" controls="">											
                                             <source src="{{ $topicvideo }}" type="video/mp4">                          								
                                         </video>
 										
                                         <span class="chose_file chose_vid">Select from Gallery</span>
 										<div class="clrscr"></div>										
-                                    </div>
+                                   
 										
 										<?php 
 										}else{ ?>
 										
-										
-                                    <div class="clrscr"></div>
-                                    <img src="{{ URL::to('assets/inner/img/upload-vid.png') }}" class="roundedimg roundedimgtopic">		
-										
-									<?php } ?>									
-									<!--<input type="file" name="topicvideo" class="jointopicimage"   >-->
+									  <div class="topic_bupload">                                 
+                                    <img src="{{ URL::to('assets/inner/img/upload-vid.png') }}" class="roundedimg roundedimgtopic">	
+									<div class="clrscr"></div>
+									 <input type="file" name="topicvideo" class="jointopicimage" style="margin-top:22px;"   >
+									
+										</div>
+										 <div class="clrscr"></div>
+									<?php }  ?>									
+									
 										<!--video src="{{ (isset($old_cont_value['topicvideo'])&&$contestdetails['contesttype']=='t')?($topicvideo):(URL::to('assets/inner/img/join_gallery.png')) }}" style="width:80px; height:80px;"></video-->
-                                     </div>
+                                   </div>
+									</div>
+									
     <?php
 } else {
     ?>
@@ -1005,28 +1015,32 @@ if ($gallerytype == 1) {
                                                         $participant_owner = User::where('ID', $participants[$i]['user_id'])->first();
                                                         ?>
                     <?php if (Auth::user()->ID == 1) { ?><div class="crsl-item"><?php } ?><div class="thumbnail">
-                                                                <a href="#" class="ib-content" >
+															<a href="#" class="ib-content" >
 
-                                                                    <div class="ib-teaser">
-                                                                        <h2><p class="defaulthide" style="display:none;" >{{ $contestdetails['contest_name'] }}</p><span class="hideinfullscreen"><?php echo substr(($participants[$i]['uploadtopic']), 0, 20) . "...."; ?></span></h2>
-                                                                    </div>
-                                                                    <div class="topiccontent">
+																<div class="ib-teaser">
+																	<h2><p class="defaulthide" style="display:none;" >{{ $contestdetails['contest_name'] }}</p><span class="hideinfullscreen"><?php echo substr(($participants[$i]['uploadtopic']), 0, 20) . "...."; ?></span></h2>
+																</div>
+																<div class="topiccontent">
 
-                                                                    </div>
-                                                                    <div class="ib-content-full">
-                                                                        <div class="fullscreen" >
-                                                        <?php echo nl2br($participants[$i]['uploadtopic']); ?>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="participant_id"><?php echo $participants[$i]['ID']; ?></div>
-                                                                    <span class="participant_detail"><?php
-                                            if ($participant_owner['firstname'] != '') {
-                                                echo $participant_owner['firstname'] . " " . $participant_owner['lastname'];
-                                            } else {
-                                                echo $participant_owner['username'];
-                                            }
-                                            ?> </span>
-                                                                </a>
+																</div>
+																<div class="ib-content-full">
+																	<div class="fullscreen" >
+													<?php echo nl2br($participants[$i]['uploadtopic']); ?>
+																	</div>
+																</div>
+																<div class="participant_id"><?php echo $participants[$i]['ID']; ?></div>
+																<span class="participant_detail"><?php
+										if ($participant_owner['firstname'] != '') {
+											echo $participant_owner['firstname'] . " " . $participant_owner['lastname'];
+										} else {
+											echo $participant_owner['username'];
+										}
+										?> </span><div class="topicphoto"><img src="<?php if($participants[$i]['topicphoto']!='') { echo url() . '/public/assets/upload/topicphotovideo/' . $participants[$i]['topicphoto']; }  ?>" /></div>
+										<div class="topicvideo"> <video width="80" height="80"  controls src="<?php if($participants[$i]['topicvideo']!=''){ echo url() . '/public/assets/upload/topicphotovideo/' . $participants[$i]['topicvideo']; } ?>" >
+										
+										</video>
+										</div>
+															</a>
                                                             </div><?php if (Auth::user()->ID == 1) { ?><span style="cursor:pointer;" onclick="return removethis('<?php echo $participants[$i]['ID']; ?>', '<?php echo $contest_id; ?>', '<?php echo $contest_partipant_id; ?>')">Remove</span></div><?php } ?>
                                                                         <?php
                                                                     }
@@ -1237,7 +1251,7 @@ if ($gallerytype == 1) {
                                                 </div>
                                             </td>
                                             <td width="1%"></td>
-                                            <td align="center" width="70" style="background:url(img/reply_left.png) no-repeat top left; min-width:70px;"><img src="{{ URL::to('/public/assets/upload/profile/'.$commentcnt[$i]['profilepicture']) }}" width="50" height="50" class="roundedimg brd_grn"><br>
+                                            <td align="center" width="70" style="background:url(img/reply_left.png) no-repeat top left; min-width:70px;"><img src="{{ ($commentcnt[$i]['profilepicture']!='')?(URL::to('public/assets/upload/profile/'.$commentcnt[$i]['profilepicture'])):(URL::to('assets/inner/images/avator.png')) }} " width="50" height="50" class="roundedimg brd_grn"><br>
                                                 <div class="cmt_uname radius"><?php
         if ($commentcnt[$i]['firstname'] == '') {
             echo $commentcnt[$i]['username'];
@@ -1266,7 +1280,7 @@ if ($gallerytype == 1) {
 
                                             <table width="98%" border="0" cellspacing="0" cellpadding="0">
                                                 <tr>
-                                                    <td width="70" align="center" style="background:url(img/reply_right.png) no-repeat top right; min-width:70px;"><img src="{{ URL::to('/public/assets/upload/profile/'.$replycmt[$j]['profilepicture']) }}" width="50" height="50" class="roundedimg brd_grn"><br>
+                                                    <td width="70" align="center" style="background:url(img/reply_right.png) no-repeat top right; min-width:70px;"><img src="{{ ($replycmt[$j]['profilepicture']!='')?(URL::to('public/assets/upload/profile/'.$replycmt[$j]['profilepicture'])):(URL::to('assets/inner/images/avator.png')) }}" width="50" height="50" class="roundedimg brd_grn"><br>
                                                         <div class="cmt_uname radius"><?php
                                     if ($replycmt[$j]['firstname'] == '') {
                                         echo $replycmt[$j]['username'];
@@ -1762,14 +1776,22 @@ loadContentItem = function($item, callback) {
 	contestid = $item.children('div.participant_id').text(),
 	participant_name = $item.children('span.ib-preview-descr').text(),
 	participant_detail = $item.children('span.participant_detail').text(),
+	topicphotosrc  =$item.children('div.topicphoto').children('img').attr('src'),
+	topicvideosrc = $item.children('div.topicvideo').children('video').attr('src'),
+	//topicphoto_preview
 	contentData = {
 	teaser		: teaser,
 	content		: content,
 	contestid   : contestid,
 	participant_name : participant_name,
-	participant_detail : participant_detail
+	participant_detail : participant_detail,
+	topicphotosrc : topicphotosrc,
+	topicvideosrc : topicvideosrc,
 	};
 
+	//console.log(topicphotosrc);
+	console.log(topicvideosrc);
+	
 	if (!hasContentPreview)
 	$('#contentTmpl').tmpl(contentData).insertAfter($ibWrapper);
 	//set the returned values and show/animate preview
@@ -1796,6 +1818,16 @@ loadContentItem = function($item, callback) {
 	$contestid = $this.find('div.participant_id'), //alert($('#ib-content-preview').length);
 	$participant_name = $this.find('span.ib-preview-descr');
 	$participant_detail = $this.find('span.participant_detail');
+	$topicphoto_img = $this.find('img.topic-preview-img'); 
+	$topicvideo_src = $this.find('video'); 
+	
+	//console.log($topicphoto_img);
+	//console.log($topicvideo_src); 
+	
+	//.topic-preview-video'
+	//topicphoto_preview
+	
+	//$('.topic-preview-img').attr('src',topicphotosrc);
 	//console.log($participant_detail);
 
 	if ($('#ib-content-preview').length > 1)
@@ -1807,6 +1839,10 @@ loadContentItem = function($item, callback) {
 	$contestid.html(contestid)
 	$participant_name.html(participant_name)
 	$participant_detail.html("<span style='font-size:14px;'>Posted by</span></br>" + participant_detail);
+	$topicphoto_img.attr('width','80px');
+	$topicphoto_img.attr('height','80px');
+	if(topicphotosrc!='') { $topicphoto_img.attr('src',topicphotosrc); }else{ $('.topicphoto_preview').hide();  }
+	if(topicvideosrc!=''){ $topicvideo_src.attr('src',topicvideosrc); }else{ $('.topicvideo_preview').hide(); }
 
 	//}
 
@@ -1817,6 +1853,7 @@ loadContentItem = function($item, callback) {
 	$contestid.show();
 	$participant_name.show();
 	$participant_detail.show();
+	//$topicphoto.show();
 	$this.find('div.participant_id').css('visibility', 'hidden');
 	var arrowshow = '<?php
 	if ($curdate <= $contestdetails['votingstartdate']) {
@@ -1885,6 +1922,22 @@ loadContentItem = function($item, callback) {
 	initContentPreviewEvents = function() {
 
 		var $preview = $('#ib-content-preview');
+		
+		console.log($('.ib-content-preview').css('width'));
+		console.log($(window).width());
+		
+		if($(window).width()<='767'){ 
+			console.log("A");
+			
+			//$('.ib-content-preview').css('height','1000px !important');  
+			$(".ib-content-preview").css("cssText", "height: auto !important;");
+			$(".ib-content-preview").css("padding-bottom", "90px");
+
+			console.log($('.ib-content-preview').css('height'));
+			
+			
+		}
+		
 		$preview.find('span.ib-nav-prev').bind('click.ibTemplate', function(event) {
 
 		navigatecontent('next'); //prev
@@ -1939,144 +1992,179 @@ loadContentItem = function($item, callback) {
 // navigate the image items in fullscreen mode
 navigate = function(dir) {
 
-//console.log(currentselecteditem); console.log(imgItemsCount);
+	//console.log(currentselecteditem); console.log(imgItemsCount);
 
-if (imgItemsCount - 1 == currentselecteditem) { if (admin == 0) location.reload(); }
-if (isAnimating) return false;
-isAnimating = true;
-var $preview = $('#ib-img-preview'),
-$loading = $preview.find('div.ib-loading-large');
-$loading.show();
-if (dir === 'next') {
+	if (imgItemsCount - 1 == currentselecteditem) { if (admin == 0) location.reload(); }
+	if (isAnimating) return false;
+	isAnimating = true;
+	var $preview = $('#ib-img-preview'),
+	$loading = $preview.find('div.ib-loading-large');
+	$loading.show();
+	if (dir === 'next') {
 
-currentselecteditem++;
-(current === imgItemsCount - 1) ? current = 0 : ++current;
-}
-else if (dir === 'prev') {
+	currentselecteditem++;
+	(current === imgItemsCount - 1) ? current = 0 : ++current;
+	}
+	else if (dir === 'prev') {
 
-(current === 0) ? current = imgItemsCount - 1 : --current;
-}
+	(current === 0) ? current = imgItemsCount - 1 : --current;
+	}
 
 
 
-var $item = $ibImgItems.eq(current),
-largeSrc = $item.children('img').data('largesrc'),
-description = $item.children('span').text();
-contestid = $item.children('div').text();
-//if(imgItemsCount-1==current) { 
+	var $item = $ibImgItems.eq(current),
+	largeSrc = $item.children('img').data('largesrc'),
+	description = $item.children('span').text();
+	contestid = $item.children('div').text();
+	//if(imgItemsCount-1==current) { 
 
-preloadImage(largeSrc, function() {
+	preloadImage(largeSrc, function() {
 
-$loading.hide();
-//get dimentions for the image, based on the windows size
-var dim = getImageDim(largeSrc);
-$preview.children('img.ib-preview-img')
-.attr('src', largeSrc)
-.css({
-width	: dim.width,
-height	: dim.height,
-left	: dim.left,
-top		: dim.top
-})
-.end()
-.find('span.ib-preview-descr')
-.html('<span style="font-size:14px;">Posted by</span></br>' + description).end()
-.find('div.participant_id').text(contestid);
-$ibWrapper.scrollTop($item.offset().top)
-.scrollLeft($item.offset().left);
-isAnimating = false;
-});
-//}
+	$loading.hide();
+	//get dimentions for the image, based on the windows size
+	var dim = getImageDim(largeSrc);
+	$preview.children('img.ib-preview-img')
+	.attr('src', largeSrc)
+	.css({
+	width	: dim.width,
+	height	: dim.height,
+	left	: dim.left,
+	top		: dim.top
+	})
+	.end()
+	.find('span.ib-preview-descr')
+	.html('<span style="font-size:14px;">Posted by</span></br>' + description).end()
+	.find('div.participant_id').text(contestid);
+	$ibWrapper.scrollTop($item.offset().top)
+	.scrollLeft($item.offset().left);
+	isAnimating = false;
+	});
+	//}
 
 },
 /// Content navigate /////
 navigatecontent = function(dir) {
 
-if (isAnimating) return false;
-isAnimating = true;
-var $preview = $('#ib-content-preview'),
-$loading = $preview.find('div.ib-loading-large');
-//$description	= $preview.find('div.participant_detail');
+	if (isAnimating) return false;
+	isAnimating = true;
+	var $preview = $('#ib-content-preview'),
+	$loading = $preview.find('div.ib-loading-large');
+	//$description	= $preview.find('div.participant_detail');
 
-$loading.show();
-if (dir === 'next') {
+	$loading.show();
+	if (dir === 'next') {
 
-if (contentItemsCount - 1 == currentselecteditem) { if (admin == 0) location.reload(); }
-currentselecteditem++;
-(current === contentItemsCount - 1) ? current = 0 : ++current;
-}
-else if (dir === 'prev') {
+	if (contentItemsCount - 1 == currentselecteditem) { if (admin == 0) location.reload(); }
+	currentselecteditem++;
+	(current === contentItemsCount - 1) ? current = 0 : ++current;
+	}
+	else if (dir === 'prev') {
 
-(current === 0) ? current = contentItemsCount - 1 : --current;
-}
+	(current === 0) ? current = contentItemsCount - 1 : --current;
+	}
 
-var $item = $ibItems.eq(current),
-//largeSrc	= $item.children('img').data('largesrc'),
-description = $item.children('div.ib-content-full').text(); //console.log(description);
-contestid = $item.children('div.participant_id').text();
-participant_name = $item.children('span.participant_detail').text();
-$preview.find('div.ib-content-full')
-.html(nl2br(description)).end().find('span.ib-preview-descr').html('<span style="font-size:14px;">Posted by</span></br>' + participant_name).end()
-.find('div.participant_id').text(contestid);
-$ibWrapper.scrollTop($item.offset().top)
-.scrollLeft($item.offset().left);
-isAnimating = false;
-$loading.hide();
+	/// Navicate topic photo ///
+	
+	//largeSrc = $item.children('img').data('largesrc'),
+	
+	var $item = $ibItems.eq(current),
+	//largeSrc	= $item.children('img').data('largesrc'),
+	description = $item.children('div.ib-content-full').text(); //console.log(description);
+	contestid = $item.children('div.participant_id').text();
+	participant_name = $item.children('span.participant_detail').text();
+	topicphoto  = $item.children('div.topicphoto').children('img').attr('src');
+	topicvideo  = $item.children('div.topicvideo').children('video').attr('src');
+	
+	console.log(topicvideo);
+	/*preloadImage(largeSrc, function() {
+
+	$loading.hide();
+	//get dimentions for the image, based on the windows size
+	var dim = getImageDim(largeSrc);
+	$preview.children('img.ib-preview-img')
+	.attr('src', largeSrc)
+	.css({
+	width	: dim.width,
+	height	: dim.height,
+	left	: dim.left,
+	top		: dim.top
+	})
+	.end()
+	.find('span.ib-preview-descr')
+	.html('<span style="font-size:14px;">Posted by</span></br>' + description).end()
+	.find('div.participant_id').text(contestid);
+	$ibWrapper.scrollTop($item.offset().top)
+	.scrollLeft($item.offset().left);
+	isAnimating = false;
+	}); */
+	
+	
+	
+	$preview.find('div.ib-content-full')
+	.html(nl2br(description)).end().find('span.ib-preview-descr').html('<span style="font-size:14px;">Posted by</span></br>' + participant_name).end()
+	.find('div.participant_id').text(contestid).end().find('img.topic-preview-img').attr('src',topicphoto);
+	$preview.find('video.topic-preview-video').attr('src',topicvideo);
+	$ibWrapper.scrollTop($item.offset().top)
+	.scrollLeft($item.offset().left);
+	isAnimating = false;
+	$loading.hide();
+	
+	//$topicphoto_img = $this.find('img.topic-preview-img');
 },
 //navigatevideo
 navigatevideo = function(dir) {
 
 
-//if( isAnimating ) return false;
+	//if( isAnimating ) return false;
 
-isAnimating = true;
-var $preview = $('#ib-video-preview'),
-$loading = $preview.find('div.ib-loading-large');
-console.log(videoItemsCount);
-//$loading.show(); 
+	isAnimating = true;
+	var $preview = $('#ib-video-preview'),
+	$loading = $preview.find('div.ib-loading-large');
+	console.log(videoItemsCount);
+	//$loading.show(); 
 
-if (dir === 'next') {
+	if (dir === 'next') {
 
-console.log(currentselecteditem);
-if (videoItemsCount - 1 == currentselecteditem) { if (admin == 0) location.reload(); }
-//if(videoItemsCount-1==current) { location.reload(); }
-(current === videoItemsCount - 1) ? current = 0 : ++current;
-currentselecteditem++;
-}
-else if (dir === 'prev') {
+	console.log(currentselecteditem);
+	if (videoItemsCount - 1 == currentselecteditem) { if (admin == 0) location.reload(); }
+	//if(videoItemsCount-1==current) { location.reload(); }
+	(current === videoItemsCount - 1) ? current = 0 : ++current;
+	currentselecteditem++;
+	}
+	else if (dir === 'prev') {
 
-(current === 0) ? current = videoItemsCount - 1 : --current;
-}
+	(current === 0) ? current = videoItemsCount - 1 : --current;
+	}
 
-var $item = $ibImgItems.eq(current),
-largeSrc = $item.children('video')[0]['currentSrc'],
-contestid = $item.children('div.participant_id').text();
-description = $item.children('span.participant_detail').text();
-/*if(videoItemsCount-1!=currentselecteditem)
-{ */
+	var $item = $ibImgItems.eq(current),
+	largeSrc = $item.children('video')[0]['currentSrc'],
+	contestid = $item.children('div.participant_id').text();
+	description = $item.children('span.participant_detail').text();
+	/*if(videoItemsCount-1!=currentselecteditem)
+	{ */
 
-preloadvideo(largeSrc, function() {
+	preloadvideo(largeSrc, function() {
 
-//$loading.hide();
+	//$loading.hide();
 
-//get dimentions for the image, based on the windows size
-//var	dim	= getImageDim( largeSrc );
+	//get dimentions for the image, based on the windows size
+	//var	dim	= getImageDim( largeSrc );
 
-$preview.children('video.ib-preview-video')
-.attr('src', largeSrc).prop("controls", true)
-.css({
-//width	: 700,
-//height	: ,
-//left	: dim.left,
-//top		: dim.top
-})
-.end().find('span.ib-preview-descr').html('<span style="font-size:14px;">Posted by</br></span>' + description).end()
-.find('div.participant_id').text(contestid);
-$ibWrapper.scrollTop($item.offset().top)
-.scrollLeft($item.offset().left);
-isAnimating = false;
-});
-//}
+	$preview.children('video.ib-preview-video')
+	.attr('src', largeSrc).prop("controls", true)
+	.css({
+	//width	: 700,
+	//height	: ,
+	//left	: dim.left,
+	//top		: dim.top
+	})
+	.end().find('span.ib-preview-descr').html('<span style="font-size:14px;">Posted by</br></span>' + description).end()
+	.find('div.participant_id').text(contestid);
+	$ibWrapper.scrollTop($item.offset().top)
+	.scrollLeft($item.offset().left);
+	isAnimating = false;
+	});
+	//}
 },
 //////
 
@@ -2471,7 +2559,7 @@ $.ajax({
 type: "POST",
 	url : '../invite_follower',
 	data : dataString,
-	success : function(data){
+	success : function(data){ console.log(data);
 	if (data == 1)
 	{
 	$(".inviteall_" + followerid).css('color', 'red');
@@ -2671,7 +2759,8 @@ if ($contestdetails['contesttype'] == 'p') {
 
         <div class="ib-content-full" style="display:none; " >${content}</div>
         <div class="participant_id" style="display:none;">${contestid}</div>
-
+		<div class="topicphoto_preview"><img src="${src}" alt="" class="topic-preview-img"/></div>
+		<div class="topicvideo_preview"><video alt="" class="topic-preview-video" src="${src}" controls></video></div>
         <div class="ib-nav" style="display:none;">				
         <!-- It is for Voting Icon -->	
 <?php if (Auth::user()->ID == 1) { ?>
@@ -2683,7 +2772,7 @@ if ($contestdetails['contesttype'] == 'p') {
 <?php } else { ?>	
             <span class="ib-nav-prev" onclick="voting('dislike','t')"  >Previous</span>
             <span class="ib-nav-next" onclick="voting('like','t')" >Next</span>
-            <span class="ib-nav-pass" onclick="voting('pass','t')" >Pass</span>	
+            <span class="ib-nav-pass pss" onclick="voting('pass','t')" >Pass</span>	
 <?php } ?>
         </div>
         <span class="ib-close" style="display:none;">Close Preview</span>
