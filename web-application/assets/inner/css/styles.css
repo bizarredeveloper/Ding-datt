@@ -84,15 +84,15 @@ h1 {
 }
 
 .crsl-item {
-  background: #fff;
+  background: #FFFFFF;
   float: left;
  /* min-width:180px;
   max-width:200px;
   min-height:210px;
   max-height:230px;*/
   min-width:125px;
-  max-width:139px;
-  min-height:175px;
+  max-width:149px;
+  min-height:188px;
   max-height:175px;
   margin: 8px;
   padding: 7px;
@@ -1669,7 +1669,7 @@ label.myLabel input[type="file"] {
 	text-align:center;
 }
 .join_des_btm{
-	margin:30px 33%;
+	//margin:0px 33%;
 }
 
 .srl_h8{
@@ -1719,8 +1719,8 @@ _:-ms-lang(x), .cont_org img{
 	border:#525252 5px solid;	
 } 
 .cont_spon img{
-	width:120px;
-	height:120px;
+	width:110px;
+	height:110px;
 	border:#52C310 5px solid;	
 }
 .cont_spon_error img{
@@ -1746,7 +1746,7 @@ _:-ms-lang(x), .cont_org img{
 	background:#52C310;
 }
 .cont_det_con h1{
-	line-height: 0.25em;
+	line-height: 23px;
   	margin-bottom: 10px;
 }
 /* contest info page ends */
@@ -2508,7 +2508,8 @@ ul
 
 .ib-content-full
 {
-height:480px; 
+//height:480px; 
+height:270px;
 overflow-y:auto;
 }
 .pch_searchgroup, .pch_searchuser{
@@ -2660,7 +2661,13 @@ backgroud:#0896DE;
 }
 .topic_imgcls{
 	float:left;
+	margin-left:50px;
 	}
+.topic_bupload{
+    margin-top: 16px;
+    width: 136px;
+	float:left;
+}
 .topic_vidcls{
 	width:170px;
 	margin-top:20px;
@@ -2679,5 +2686,142 @@ backgroud:#0896DE;
   position: relative;
   top: 34px;
   }
+ .topicphoto_preview{
+
+    /*width: 29%;
+    height: auto;*/
+		width: 320px;
+height: 243px;
+	float:left;
+	margin-left:10%;
+}
+.topicphoto_preview img{
+	width:100%;
+	height:100%;
+	}
+.topicvideo_preview{
+	/*width:45%;
+	height:243px;
+	height:auto;
+	float:right;
+	margin-right:10%;*/
+	width: 320px;
+height: 243px;
+float: right;
+margin-right: 10%;
+	}
+.topicvideo_preview video{
+	width:100% !important;
+	height:100% !important;
+	}
+.top_ht{
+		display:block;
+		}
+		.pss{
+		display:block;
+		}
+		.topic_cls{
+		margin-left:33%;
+		}
+		.txt_size{
+			width:70%;
+			height:230px;
+			}
+.bloc{
+display:block !important;
+}
+@media screen and (min-width:901px) and (max-width:1024px) {
+.topic_cls{
+		margin-left:20%;
+		}
+
+}
+@media screen and (max-width:900px) and (min-width:768px){
+	.bloc{
+display:block !important;
+}
+.topic_cls{
+		margin-left:20%;
+		}
+
+}
+@media screen and (max-width:767px){
+	
+	.txt_size{
+			width:100%;
+			}
+			.topic_imgcls {
+    float: left;
+    margin-left: 0px;
+    width: 100%;
+	}
+	.topic_bupload {
+    margin-top: 16px;
+    float: left;
+    width: 100%;
+	margin-left: -11px;
+	}
+	.topic_cls {
+    margin-left: 0%;
+	
+	}
+	}
+@media screen and (min-width:768px) and (max-width:979px) {
+	.topicphoto_preview{
+
  
-  
+		width: 280px;
+height: 210px;
+	float:left;
+	margin-left:5%;
+}
+.topicvideo_preview{
+	/*width:45%;
+	height:243px;
+	height:auto;
+	float:right;
+	margin-right:10%;*/
+	width: 290px;
+height: 210px;
+float: right;
+margin-right: 5%;
+	}
+
+}
+@media screen and (max-width:767px) {
+	.topicphoto_preview{
+
+ 
+		width: 80%;
+height: auto;
+	float:left;
+	margin-left:10%;
+}
+.topicvideo_preview{
+	/*width:45%;
+	height:243px;
+	height:auto;
+	float:right;
+	margin-right:10%;*/
+	width: 80%;
+height: auto;
+float: left;
+margin-left: 10%;
+margin-top:30px;
+}
+.top_ht{
+		display:block;
+		height:auto !important;
+}
+.pss{
+	
+position: absolute !important;
+left: 0px;
+top: 80% !important;
+}
+
+
+
+}
+
+ 
