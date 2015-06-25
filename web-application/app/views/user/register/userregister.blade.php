@@ -41,7 +41,7 @@
 
 <div class="fscntxt_block">
     <h1><span id="txt_homehead">Welcome to Ding Datt</span></h1>
-    <p><span id="txt_homepage">Lorem Ipsum dollar site is simply a dummy content. Commonly used in printing and typesetting Industries.</span></p>
+    <p><span >Relax! We are all crazy- It's always a competition!</span></p>
 </div>
 <div class="Mb_tit"><h2 style="text-align:center;"><span id="txt_signup" class="txt_signup">Sign Up</span></h2></div>
 <div class="loginbox radius">

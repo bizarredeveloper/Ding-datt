@@ -187,7 +187,7 @@ if (Session::has('searcheduser')) {
                     <tr>
                         <th>S.NO</th>
                         <th>Contest name</th>
-                                    <!--<th>Contest owner</th>-->
+                        <th>Contest owner</th>
                         <th>Contest type</th>
                         <th>Visibility type</th>
                         <th>Image</th>
@@ -209,12 +209,12 @@ if (Session::has('searcheduser')) {
                                         }
                                         for ($i = 0; $i < count($usercontestlist); $i++) {
 
-                                            //$createdowner = User::select('firstname','lastname','username')->where('ID',$usercontestlist[$i]['createdby'])->get();
+                                           $createdowner = User::select('firstname','lastname','username')->where('ID',$usercontestlist[$i]['createdby'])->get();
                                             ?>
                                             <tr>
                                                 <td>{{ $i+1; }} </td>
                                                 <td class="tr_wid_id"><a href="{{ URL::to('contest_info/'.$usercontestlist[$i]['ID']) }}" style="text-decoration:none;">{{ $usercontestlist[$i]['contest_name'] }}</a></td>
-                                                <?php /* <td><?php if($createdowner[0]['firstname']!=''){ echo $createdowner[0]['firstname'].' '.$createdowner[0]['lastname'];  }else{ echo $createdowner[0]['username']; } ?></td> */ ?>
+                                               <td><?php if($createdowner[0]['firstname']!=''){ echo $createdowner[0]['firstname'].' '.$createdowner[0]['lastname'];  }else{ echo $createdowner[0]['username']; } ?></td> 
                                                 <td ><?php
                                                     if ($usercontestlist[$i]['contesttype'] == 'p')
                                                         echo "Photo";
