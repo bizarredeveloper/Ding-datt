@@ -154,7 +154,8 @@ class adminController extends BaseController {
                 elseif (in_array($val['ctrlCaptionId'], ['txt_timezone_required']))
                     $er_data['timezone'] = "<span id='" . $val['ctrlCaptionId'] . "'>Timezone is required</span>";
             }
-	$updatedata=Input::get('interest');
+			$updatedata['interest']=Input::get('interest');
+			//return $updatedata;
             return Redirect::to('/user')->with('tab', 'createuser')->with('er_data', $er_data)->with('old_data', $updatedata);
         }
     }

@@ -346,7 +346,7 @@ if (Session::has('searcheduser')) {
                                                     <p>
                                                     <div class="inp_pfix"><img src="{{ URL::to($assets_path.'img/interest_icons.png') }}" width="25" height="25"></div>
 
-                                                    {{ Form::select('interest[]', $interestList,$userInterest, array('class'=>'SlectBox testsel radius','multiple'=>'multiple','placeholder'=>'Select Interest','title'=>'Select Interest','onchange'=>'console.log($(this).children(":selected").length)')) }}
+                                                    {{ Form::select('interest[]', $interestList,isset($old_data['interest'])?$old_data['interest']:$userInterest, array('class'=>'SlectBox testsel radius','multiple'=>'multiple','placeholder'=>'Select Interest','title'=>'Select Interest','onchange'=>'console.log($(this).children(":selected").length)')) }}
                                                     </p>
                                                 </legend>
                                             </div>
