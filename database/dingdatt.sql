@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2015 at 04:14 PM
+-- Generation Time: Jul 08, 2015 at 11:41 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -171,21 +171,7 @@ CREATE TABLE IF NOT EXISTS `interest_category` (
   `updateddate` datetime NOT NULL,
   PRIMARY KEY (`Interest_id`),
   KEY `status` (`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `interest_category`
---
-
-INSERT INTO `interest_category` (`Interest_id`, `Interest_name`, `status`, `createddate`, `updateddate`) VALUES
-(1, 'Cinema', 0, '2015-03-16 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Music', 1, '2015-03-16 00:00:00', '2015-03-16 00:00:00'),
-(3, 'Photo', 0, '2015-03-19 00:00:00', '0000-00-00 00:00:00'),
-(4, 'new1', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 'test admin 222111', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(6, 'asdsd', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 'cvcv', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(8, 'Photo1', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -237,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `invitememberforgroup` (
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -253,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `language_details` (
   `value_sp` varchar(200) NOT NULL,
   PRIMARY KEY (`controlID`),
   KEY `ctrlCaptionId` (`ctrlCaptionId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=218 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=211 ;
 
 --
 -- Dumping data for table `language_details`
@@ -278,7 +264,7 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (16, 'txt_reject', 'Reject', 'rejeter', 'Rechazar'),
 (17, 'alert_enterusername', 'The username field is required.', 'Le champ de nom d''utilisateur est n?cessaire.', 'El campo de usuario es necesario.'),
 (18, 'alert_validemail', 'The email must be a valid email address.', 'L''e-mail doit ?tre une adresse e-mail valide.', 'El email ha de ser una direcci?n de email v?lida.'),
-(19, 'alert_invaliduserpas', 'UserName or Password Invalid', 'Nom d''utilisateur ou mot de passe incorrect', 'Usuario o Contrase?a incorrecto'),
+(19, 'alert_invaliduserpass', 'UserName or Password Invalid', 'Nom d''utilisateur ou mot de passe incorrect', 'Usuario o Contrase?a incorrecto'),
 (20, 'alert_enteremail', 'The Email field is required.', 'Le champ Email est requis.', 'El campo Email es necesario.'),
 (21, 'alert_alreadyuser', 'The username has already been taken.', 'Le nom d''utilisateur a d?j? ?t? prise.', 'Este usuario ya ha sido registrado.'),
 (22, 'txt_edit', 'Edit', '?diter', 'Editar'),
@@ -289,15 +275,15 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (27, 'txt_signup', 'Sign Up', 'signer', 'Reg?strate'),
 (28, 'txt_menu_profile', 'Profile', 'profil', 'Perfil'),
 (29, 'txt_menu_userdetails', 'User Details', 'D?tails de l''utilisateur', 'Detalles de Usuario'),
-(30, 'txt_menu_profile_upd', 'Profile Update', 'profil Mise ? jour', 'Editar Perfil'),
+(30, 'txt_menu_profile_update', 'Profile Update', 'profil Mise ? jour', 'Editar Perfil'),
 (31, 'txt_menu_logout', 'Logout', 'D?connexion', 'Desconectar'),
-(32, 'txt_user_registratio', 'User Registration', 'Enregistrement de l''utilisateur', 'Registro de Usuario'),
+(32, 'txt_user_registration', 'User Registration', 'Enregistrement de l''utilisateur', 'Registro de Usuario'),
 (33, 'txt_user_firstname', 'First Name', 'pr?nom', 'Nombre'),
 (34, 'txt_user_lastname', 'Last Name', 'nom de famille', 'Apellido'),
 (35, 'txt_user_email', 'email', 'email', 'Email'),
 (36, 'txt_user_mobile', 'Mobile', 'mobile', 'M?vil'),
 (37, 'txt_confirm_password', 'Confirm Password', 'Confirmez Le Mot De Passe', 'Confirmar Contrase'),
-(38, 'txt_userdetaile_save', 'You have successfullly register with DingDatt. Please check your email to proceed furthur.', 'Vous avez successfullly inscrire aupr?s DingDatt. Se il vous pla?t v?rifier votre e-mail de proc?der', 'Te has registrado con ?xito en DingDatt. Por favor, verifica tu email para continuar.'),
+(38, 'txt_userdetaile_save_msg', 'You have successfullly register with DingDatt. Please check your email to proceed furthur.', 'Vous avez successfullly inscrire aupr?s DingDatt. Se il vous pla?t v?rifier votre e-mail de proc?der', 'Te has registrado con ?xito en DingDatt. Por favor, verifica tu email para continuar.'),
 (39, 'txt_webpanel', 'Web panel', 'panneau de web', 'Panel Web'),
 (40, 'txt_user_details', 'User Details', 'D?tails de l''utilisateur', 'Detalles de Usuario'),
 (41, 'txt_add_user', 'Add user', 'Ajouter un utilisateur', 'A?adir Usuario'),
@@ -307,7 +293,7 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (45, 'txt_delete_record', 'Delete records?', 'Supprimer des enregistrements ?', '?Eliminar registros?'),
 (46, 'txt_ok', 'OK', 'D''ACCORD', 'OK'),
 (47, 'txt_user_update_msg', 'User details updated successfully', 'D?tails de l''utilisateur Mise ? jour avec succ', 'Los detalles de usuario se han cargado satisfactoriamente'),
-(48, 'txt_homepage', 'Lorem Ipsum dollar site is simply a dummy content. Commonly used in printing and typesetting Industr', 'Lorem Ipsum site dollar est tout simplement un contenu factice. Commun?ment utilis? dans l''impressio', 'Lorem Ipsum dollar es simplemente un contenido ficticio. Normalmente usado en la industria de la imp'),
+(48, 'txt_homepage', 'Relax! We are all crazy- It''s always a competition!', 'Détendez-Vous! Nous sommes tous crazy- Il est toujours une compétition!', 'Relájese! Todos estamos crazy- Siempre es una competencia!'),
 (49, 'txt_homehead', 'Welcome to Ding Datt', 'Bienvenue ? Ding Datt', 'Bienvenido a Ding Datt'),
 (50, 'txt_face_signin', 'Signin using Facebook', 'Signin utilisant Facebook', 'Registrarse usando Facebook'),
 (51, 'txt_ggl_signin', 'Signin using Google +', 'Signin utilisant Google +', 'Registrarse usando Goolge +'),
@@ -326,21 +312,21 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (64, 'mnu_mycontest', 'MY CONTEST', 'MON CONCOURS', 'Mi concurso '),
 (65, 'mnu_myhistory', 'MY HISTORY', 'MON HISTOIRE', 'MI HISTORIA'),
 (66, 'txt_myprofile', 'My Profile', 'Mon profil', 'MI Perfil'),
-(67, 'alert_enteruserorema', 'The usename or email field is required.', 'Le champ de usename ou e-mail est n?cessaire.', 'El usuario o email es necesario'),
+(67, 'alert_enteruseroremail', 'The usename or email field is required.', 'Le champ de usename ou e-mail est n?cessaire.', 'El usuario o email es necesario'),
 (68, 'txt_twit_signin', 'Signin using Twitter', 'Signin utilisant Twitter', 'Registrarse usando Twitter'),
 (69, 'txt_logininfo', 'Login Info', 'login Info', 'Informaci?n de registro'),
 (70, 'txt_socialinfo', 'Social Info', 'Infos sociale', 'Informaci?n Social'),
 (71, 'txt_favorite', 'Favorite', 'favori', 'Favorito'),
 (72, 'txt_personalinfo', 'Personal Info', 'Infos personnelles', 'Datos Personales'),
 (73, 'txt_gender', 'Gender', 'sexe', 'Sexo'),
-(74, 'txt_maritalstatus', 'Marital Status', '?tat Civil', 'Estado Civil'),
+(74, 'txt_maritalstatus', 'Marital', '?tat Civil', 'Estado Civil'),
 (75, 'txt_male', 'Male', 'm?le', 'Hombre'),
 (76, 'txt_female', 'Female', 'femelle', 'Mujer'),
 (77, 'txt_single', 'Single', 'unique', 'Soltero/a'),
 (78, 'txt_married', 'Married', 'mari', 'Casado/a'),
-(79, 'txt_changeprofileima', 'Change Profile Image', 'Changez Image de profil', 'Cambiar imagen de perfil'),
+(79, 'txt_changeprofileimage', 'Change Profile Image', 'Changez Image de profil', 'Cambiar imagen de perfil'),
 (80, 'txt_updateprofile', 'Update Profile', 'Mise ? jour le profil', 'Actualizar Perfil'),
-(81, 'alert_passconfnotmat', 'The password confirmation does not match.', 'La confirmation de mot de passe ne correspond pas.', 'La confirmaci?n de contrase?a no coincide.'),
+(81, 'alert_passconfnotmatch', 'The password confirmation does not match.', 'La confirmation de mot de passe ne correspond pas.', 'La confirmaci?n de contrase?a no coincide.'),
 (82, 'pch_confirmpassword', 'Confirm Password', 'Confirmez Le Mot De Passe', 'Confimar Contrase'),
 (83, 'pch_facebookpage', 'Facebook Page', 'Cette page facebook', 'P?gina de Facebook'),
 (84, 'pch_twitterpage', 'Twitter Page', 'Twitter page', 'P?gina de Twitter'),
@@ -356,8 +342,8 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (94, 'pch_noofkids', 'No of Kids', 'Pas d''enfants', 'N?mero de Hijos'),
 (95, 'pch_useroremail', 'User Name / Email', 'Nom d''utilisateur / Email', 'Nombre de Usuario / Email'),
 (96, 'txt_resendpassword', 'Resend Password', 'renvoyer Mot de passe', 'Reenviar Contrase'),
-(97, 'alert_sendpasssucces', 'New Password sent to your mail. Please check your email to proceed further.', 'Nouveau mot de passe envoy? ? votre courrier. Se il vous pla?t v?rifier votre e-mail d''aller plus lo', 'Nueva Contrase?a enviada a tu email. Por favor, comprueba tu email para poder continuar.'),
-(98, 'alert_useroremailnot', 'UserName or Email not Found', 'Nom d''utilisateur ou Email introuvable', 'Nombre de Usuario o Contrase?a no encontrado'),
+(97, 'alert_sendpasssuccess', 'New Password sent to your mail. Please check your email to proceed further.', 'Nouveau mot de passe envoy? ? votre courrier. Se il vous pla?t v?rifier votre e-mail d''aller plus lo', 'Nueva Contrase?a enviada a tu email. Por favor, comprueba tu email para poder continuar.'),
+(98, 'alert_useroremailnotfound', 'UserName or Email not Found', 'Nom d''utilisateur ou Email introuvable', 'Nombre de Usuario o Contrase?a no encontrado'),
 (99, 'txt_menu_about', 'About', 'sur', 'Sobre'),
 (100, 'txt_menu_support', 'Support', 'soutien', 'Soporte'),
 (101, 'txt_menu_terms', 'Terms', 'termes', 'Condiciones'),
@@ -373,8 +359,8 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (111, 'txt_photo', 'Photo', 'photo', 'Foto'),
 (112, 'txt_video', 'Video', 'vid', 'V?deo'),
 (113, 'txt_topic', 'Topic', 'sujet', 'Tema'),
-(114, 'txt_uploadcontestima', 'Upload Contest Image', 'Ajouter concours image', 'Subir Imagen de Concurso'),
-(115, 'txt_uploadsponserima', 'Upload Sponsor Image', 'T?l?chargez commanditaire image', 'Subir Imagen del Patrocinador'),
+(114, 'txt_uploadcontestimage', 'Upload Contest Image', 'Ajouter concours image', 'Subir Imagen de Concurso'),
+(115, 'txt_uploadsponserimage', 'Upload Sponsor Image', 'T?l?chargez commanditaire image', 'Subir Imagen del Patrocinador'),
 (116, 'pch_contestname', 'Contest Name: ', 'Nom concours', 'Nombre de Concurso'),
 (117, 'pch_nofopartis0', 'No. of Participants - 0 for Unlimited', 'Nombre de participants - 0 pour illimit', 'N?mero de Participantes - 0 para ilimitado'),
 (118, 'pch_contestprize', 'Contest Prize: ', 'prix du concours: ', 'Premio del Concurso'),
@@ -385,15 +371,15 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (123, 'votingstart', 'Voting Start Date: ', 'Vote Date de d?but: ', 'La Votaci?n comienza:'),
 (124, 'votingend', 'Voting End Date: ', 'Vote Date de fin: ', 'La Votaci?n finaliza:'),
 (125, 'alert_enterterms', 'Accept terms', 'accepter les conditions', 'Acepto las condiciones'),
-(126, 'alert_entercontestna', 'The Contest Name field is required.', 'Le champ du nom du concours est n?cessaire.', 'El campo con el Nombre del Concurso es obligatorio.'),
-(127, 'alert_entercontestst', 'The Contest Start Date field is required.', 'Le champ conteststartdate est n?cessaire.', 'El campo con la Fecha de comienzo del Concurso es obligatorio.'),
+(126, 'alert_entercontestname', 'The Contest Name field is required.', 'Le champ du nom du concours est n?cessaire.', 'El campo con el Nombre del Concurso es obligatorio.'),
+(127, 'alert_enterconteststartdate', 'The Contest Start Date field is required.', 'Le champ conteststartdate est n?cessaire.', 'El campo con la Fecha de comienzo del Concurso es obligatorio.'),
 (128, 'alert_contestenddate', 'The Contest End Date field is required.', 'Le champ contestenddate est n?cessaire.', 'El campo con la Fecha de finalizaci?n del Concurso es obligatorio.'),
 (129, 'alert_votingstartdat', 'The Voting Start Date field is required.', 'Le champ votingstartdate est n?cessaire.', 'El campo con la Fecha de comienzo de las Votaciones es obligatorio.'),
 (130, 'alert_votingenddate', 'The Voting End Date field is required.', 'Le champ votingenddate est n?cessaire.', 'El campo con la Fecha de finalizaci?n de las Votaciones es obligatorio.'),
-(131, 'alert_enternoofparti', 'The No of Participant field is required.', 'Le champ noofparticipant est n?cessaire.', 'El campo n?mero de participantes es obligatorio.'),
-(132, 'alert_entercontestty', 'The Contest Type field is required.', 'Le champ contesttype est n?cessaire.', 'El campo con el Tipo de Concurso es obligatorio.'),
-(133, 'alert_alreadycontest', 'The contest name has already been taken.', 'Le nom du concours a d?j? ?t? prise.', 'El nombre del concurso ya ha sido seleccionado.'),
-(134, 'txt_changecontestima', 'Change Contest Image', 'Changer l''image du concours', 'Cambiar la Imagen del Concurso'),
+(131, 'alert_enternoofpartis', 'The No of Participant field is required.', 'Le champ noofparticipant est n?cessaire.', 'El campo n?mero de participantes es obligatorio.'),
+(132, 'alert_entercontesttype', 'The Contest Type field is required.', 'Le champ contesttype est n?cessaire.', 'El campo con el Tipo de Concurso es obligatorio.'),
+(133, 'alert_alreadycontestname', 'The contest name has already been taken.', 'Le nom du concours a d?j? ?t? prise.', 'El nombre del concurso ya ha sido seleccionado.'),
+(134, 'txt_changecontestimage', 'Change Contest Image', 'Changer l''image du concours', 'Cambiar la Imagen del Concurso'),
 (135, 'txt_editcontest', 'Edit Contest', 'Modifier concours', 'Editar Concurso'),
 (136, 'txt_updatecontest', 'Update Contest', 'Mise ? jour du concours', 'Actualizar Concurso'),
 (137, 'alert_themephoto', 'The Contest Image field is required.', 'Le champ Image concours est n?cessaire.', 'El campo imagen del concurso es obligatorio.'),
@@ -406,7 +392,7 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (144, 'txt_privatecontest', 'Private', 'priv', 'Privado'),
 (145, 'txt_contestlist', 'Contest List', 'Liste concours', 'Listado de Concursos'),
 (146, 'pch_searchcontest', 'Search Contest', 'Rechercher Concours', 'Buscar Concurso'),
-(147, 'txt_participatedcont', 'Participated Contest', 'concours particip', 'Concursos participados'),
+(147, 'txt_participatedcontest', 'Participated Contest', 'concours particip', 'Concursos participados'),
 (148, 'txt_createdcontest', 'Created Contest', 'cr?? concours', 'Concurso Creado'),
 (149, 'mnu_group', 'Group', 'groupe', 'Grupo'),
 (150, 'mnu_otherprofile', 'Other Profile', 'autre Profil', 'Otro Perfil'),
@@ -425,24 +411,24 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (163, 'alert_groupdelete', 'Group Deleted Successfully', 'Groupe Supprim? avec succ', 'Grupo Eliminado Correctamente'),
 (164, 'txt_groupmember', 'Group Member', 'membre du groupe', 'Miembro del Grupo'),
 (165, 'alert_save_message', 'Group Details Added successfully', 'Groupe de D?tails Ajout?s ? succ', 'Detalles del grupo a?adidos correctamente'),
-(166, 'alert_groupnameverif', 'The groupname has already been taken.', 'Le nom de groupe a d?j? ?t? prise.', 'El Nombre del Grupo ya ha sido seleccionado'),
-(167, 'alert_group_member_d', 'Group Member Deleted Successfully', 'Membre du groupe Supprim? avec succ', 'Miembro del Grupo Eliminado Correctamente'),
+(166, 'alert_groupnameverify', 'The groupname has already been taken.', 'Le nom de groupe a d?j? ?t? prise.', 'El Nombre del Grupo ya ha sido seleccionado'),
+(167, 'alert_group_member_delete', 'Group Member Deleted Successfully', 'Membre du groupe Supprim? avec succ', 'Miembro del Grupo Eliminado Correctamente'),
 (168, 'txt_sno', 'S No', 'S Non', 'S N?mero (No?)'),
 (169, 'txt_grpowner', 'Group owner', 'Propri?taire du groupe', 'Creador del Grupo'),
 (170, 'txt_remove', 'Remove', 'supprimer', 'Eliminar'),
 (171, 'txt_memname', 'Member Name', 'Nom De Membre', 'Nombre de usuario'),
 (172, 'txt_submenu_profile', 'Profile info', 'infos du Profil', 'Informaci?n del Perfil'),
 (173, 'txt_submenu_history', 'History', 'histoire', 'Historia / Historial'),
-(174, 'txt_submenu_editprof', 'Edit Profile', 'Modifier le profil', 'Editar Perfil'),
+(174, 'txt_submenu_editprofile', 'Edit Profile', 'Modifier le profil', 'Editar Perfil'),
 (175, 'txt_timezone', 'Time Zone', 'fuseau horaire', 'Zona Horaria'),
 (176, 'txt_load_more', 'Load more', 'charger plus', 'Cargar m'),
-(177, 'txt_following_userna', 'Following User Name', 'Apr?s Nom d''utilisateur', 'Seguir Nombre de Usuario'),
-(178, 'txt_follower_usernam', 'Follower user name', 'Nom d''utilisateur Suiveur', 'Nombre de Usuario del segidor'),
-(179, 'txt_groupmember_Acce', 'Group Request', 'Demande Groupe', 'Petici?n de Grupo'),
+(177, 'txt_following_username', 'Following User Name', 'Apr?s Nom d''utilisateur', 'Seguir Nombre de Usuario'),
+(178, 'txt_follower_username', 'Follower user name', 'Nom d''utilisateur Suiveur', 'Nombre de Usuario del segidor'),
+(179, 'txt_groupmember_Accept', 'Group Request', 'Demande Groupe', 'Petici?n de Grupo'),
 (180, 'txt_group_Accept', 'Accept the group member', 'Acceptez le membre du groupe', 'Aceptar como miembro de grupo'),
 (181, 'btn_accept', 'Accept', 'accepter', 'Aceptar'),
-(182, 'txt_admingroup', 'Group admin request', 'Demande d''admin Groupe', 'Petici?n de administrador de Grupo'),
-(183, 'txt_adminrequest', 'Group member request', 'Demande d''?tablissement d''?l?ment de groupe', 'Petici?n de miembro de grupo'),
+(182, 'txt_admingroup', 'Group join request', 'Demande d''admin Groupe', 'Petici?n de administrador de Grupo'),
+(183, 'txt_adminrequest', 'Group invitation received', 'Demande d''?tablissement d''?l?ment de groupe', 'Petici?n de miembro de grupo'),
 (184, 'txt_join', 'Join', 'joindre', 'Unirse'),
 (185, 'txt_gallery', 'Gallery', 'galerie', 'Galer'),
 (186, 'txt_leaderboard', 'Leader Board', 'Leaderboard', 'Pizarra del lider'),
@@ -450,7 +436,7 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (188, 'mnu_follower', 'Follower', 'disciple', 'Seguidores'),
 (189, 'txt_prize', 'Prize:', 'prix: ', 'Premio:'),
 (190, 'txt_noofparticipant', 'No of Participants: ', 'Aucun des participants: ', 'N?mero de Participantes:'),
-(191, 'txt_contestdescripti', 'Contest Description', 'description du concours', 'Descripci?n del concurso'),
+(191, 'txt_contestdescription', 'Contest Description', 'description du concours', 'Descripci?n del concurso'),
 (192, 'txt_organizer', 'Organizer', 'organisateur', 'Organizador'),
 (193, 'txt_invite_selected', 'Invite Selected', 'Inviter s?lectionn', 'Invitado seleccionado'),
 (194, 'txt_followername', 'Follower Name', 'Nom suiveur', 'Nombre del seguidor'),
@@ -462,21 +448,14 @@ INSERT INTO `language_details` (`controlID`, `ctrlCaptionId`, `value_en`, `value
 (200, 'txt_userlist', 'User List', 'la liste des utilisateurs', 'Listado de usuarios'),
 (201, 'submnu_editgroup', 'Edit group', 'Modifier le groupe', 'Editar grupo'),
 (202, 'txt_group_update', 'Group Details Updated Successfully', 'D?tails Groupe correctement mis ? jour', 'Detalles del Grupo actualizados satisfactoriamente'),
-(203, 'alert_delete_group_m', 'Are you sure you want to delete?', 'Vous ?tes Sure Delete Ce message', '?Est?s seguro que quieres eliminarlo?'),
+(203, 'alert_delete_group_msg', 'Are you sure you want to delete?', 'Vous ?tes Sure Delete Ce message', '?Est?s seguro que quieres eliminarlo?'),
 (204, 'btn_addmember', 'Add member', 'Ajouter un membre', 'A?adir miembro'),
 (205, 'txt_updategrp', 'Update group', 'Groupe de mise ? jour', 'Actualizar Grupo'),
 (206, 'txt_unfollow', 'Unfollow', 'Se d?sabonner', 'Dejar de Seguir'),
 (207, 'txt_grp_img', 'Group Image', 'image de groupe', 'Imagen del Grupo'),
 (208, 'txt_groupadminname', 'Group admin name', 'Nom du groupe admin', 'Nombre del administrador del grupo'),
 (209, 'pch_searchgroup', 'Search group', 'Groupe de Recherche', 'Buscar Grupo'),
-(210, 'txt_timezone_require', 'The timezone must be at least 2 characters.', 'Le champ de fuseau horaire est n?cessaire.', 'La zona horaria debe tener al menos 2 caracteres'),
-(211, 'alert_enternoofpartis', 'The No of Participant field is required.', 'Le champ noofparticipant est nécessaire.', ''),
-(212, 'alert_entercontestname', 'The Contest Name field is required.', 'Le champ du nom du concours est nécessaire.', ''),
-(213, 'alert_invaliduserpass', 'UserName or Password Invalid', 'Nom d''utilisateur ou mot de passe incorrect', ''),
-(214, 'alert_invaliduserpass', 'UserName or Password Invalid', 'Nom d''utilisateur ou mot de passe incorrect', ''),
-(215, 'alert_sendpasssuccess', 'New Password sent to your mail. Please check your email to proceed further.', 'Nouveau mot de passe envoyé à votre courrier. Se il vous plaît vérifier votre e-mail d''aller plus loin.', ''),
-(216, 'txt_userdetaile_save_msg', 'You have successfullly register with DingDatt. Please check your email to proceed furthur.', 'Vous avez successfullly inscrire auprès DingDatt. Se il vous plaît vérifier votre e-mail de procéder furthur.', ''),
-(217, 'alert_entercontesttype', 'The Contest Type field is required.', 'Le champ contesttype est nécessaire.\r\n', '');
+(210, 'txt_timezone_required', 'The timezone must be at least 2 characters.', 'Le champ de fuseau horaire est n?cessaire.', 'La zona horaria debe tener al menos 2 caracteres');
 
 -- --------------------------------------------------------
 
@@ -1983,20 +1962,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `facebook_id` char(30) NOT NULL,
   `google_id` varchar(50) NOT NULL,
   `timezone` varchar(30) NOT NULL,
+  `dateformat` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID`, `email`, `username`, `password`, `remember_token`, `firstname`, `lastname`, `mobile`, `gender`, `dateofbirth`, `profilepicture`, `facebookpage`, `twitterpage`, `instagrampage`, `hometown`, `school`, `occupation`, `maritalstatus`, `noofkids`, `favoriteholidayspot`, `device_type`, `device_id`, `gcm_id`, `notification_id`, `status`, `createddate`, `updateddate`, `facebook_id`, `google_id`, `timezone`) VALUES
-(1, 'madhupriya@bizarresoftware.in', 'admin', '$2y$10$NDRP2QMoF3Zv6IA1pPYrCe55WbZQSnbrQHQs5p0tyldJmUHfgcPyC', '', '', '', '', '', '2015-06-01', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 'EST'),
-(2, 'mangaipriya@bizarresoftware.in', 'mangai', '$2y$10$FuYSZfSguGtCoENfOQT89e94hk5ZmgGitiyZHOT5FQrdlVuMBMgN6', '', '', '', '', 'm', '2015-06-10', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 'Asia/Calcutta'),
-(3, 'ajai@bizarresoftware.in', 'ajai', '$2y$10$p7PVD2fjXqE/uafCSsknR.eaRgtrJcbT2t4CJiSqM83F13diPScJW', '', '', '', '', 'm', '2015-06-10', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 'Asia/Calcutta'),
-(4, 'kscbe90@gmail.com', 'dingdatt', '$2y$10$Q80m9rlapPvPqDRN5VotjucLgLaKbsZKcXdjtUzsul944XGQXBDBi', '', '', '', '', 'm', '1990-12-29', '', '', '', '', '', '', '', 0, 0, '', 'A', '7e1743088a0eee1d', 'APA91bENfvS0XGih6v3lL2fVLJPUAiha7vGCBm27Y5Cn5TzEI-Ngi6r-fvw_HnjO9-CU1XAdVAdXGGF3vSCl5pLrvs9pPhuaCafyUck2xM3tavw83n95JvhaCOvuPzF4CFy29UeU8qnX', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 'Asia/Calcutta'),
-(5, 'ramanapriya@bizarresoftware.in', 'test', '$2y$10$Fti8ZgdYb8byW82WXdNojerEVhZOr/Z5dFxA0WrxfT1WMYLntLvLu', '', '', '', '', 'm', '2015-06-01', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 'EST'),
-(6, 'deenadhayalan@bizarresoftware.in', 'deena', '$2y$10$Tf/ZDZociug//e1EV9fG4.22UAAWmHAfh/OZyGads/dQJgkiEOTES', '', '', '', '', '', '2015-06-15', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 'EST');
+INSERT INTO `user` (`ID`, `email`, `username`, `password`, `remember_token`, `firstname`, `lastname`, `mobile`, `gender`, `dateofbirth`, `profilepicture`, `facebookpage`, `twitterpage`, `instagrampage`, `hometown`, `school`, `occupation`, `maritalstatus`, `noofkids`, `favoriteholidayspot`, `device_type`, `device_id`, `gcm_id`, `notification_id`, `status`, `createddate`, `updateddate`, `facebook_id`, `google_id`, `timezone`, `dateformat`) VALUES
+(1, 'madhupriya@bizarresoftware.in', 'admin', '$2y$10$dBZqAba4mcP4ACOvPE2n7uUbN0ynaWMyLd5iJEFok8bYvLH7kc9q2', '', '', '', '', '', '1990-09-17', '', '', '', '', '', '', '', 0, 0, '', '', '', '', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 'EST', 'mm/dd/yy');
 
 -- --------------------------------------------------------
 
