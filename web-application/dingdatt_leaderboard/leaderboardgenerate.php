@@ -3,6 +3,7 @@
 
 $conn = mysql_connect("localhost","root","");
 $db = mysql_select_db('dingdatt',$conn) ; 
+
 date_default_timezone_set("UTC");
 $curdate = date("Y-m-d H:i:s", time());
 

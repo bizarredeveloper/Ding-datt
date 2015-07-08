@@ -154,6 +154,8 @@ table.display {
 	border: 1px solid #e6e6e6!important;
 	border-top: none;
 	border-color: gray;
+	margin-left:1%;
+	  width: 99% !important;
 	/* Note Firefox 3.5 and before have a bug with border-collapse
 	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
 	 * border-spacing: 0; is one possible option. Conditional-css.com is
@@ -662,5 +664,7 @@ div.box {
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     color: #606060;
     padding: 0 !important;
-    width: auto;
+   	width:auto !important ; /* auto 100% 300px*/
+	margin-bottom:20px;
+
 }
